@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pass = limpiar($_POST['pass']);
 
     if (empty($user) || empty($pass)) {
-        $_SESSION['errores'] ="Debes ingresar usuario y contraseña.";
+        $_SESSION['errores'] = "Debes ingresar usuario y contraseña.";
 
         header("Location: ../pages/login.php");
         exit();
@@ -39,8 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['id_usuario'] = $fila['id_usuario'];
             $_SESSION['permiso'] = $fila['permiso'];
             $_SESSION['num_colegiado'] = $fila['num_colegiado'];
-
-            header("Location: ../admin/panel.php");
+            if ($user == $pass) {
+                header("Location: ../admin/usuarios/cambioContrasena.php");
+            } else {
+                header("Location: ../admin/panel.php");
+            }
         } else {
             // $errores[] = '<div class="alert alert-danger" role="alert">Usuario no encontrado.</div>';
             $_SESSION['errores'] = "Existe un error con tu usuario o contraseña.";

@@ -28,14 +28,46 @@ class Paciente
         $this->conn = require "../../controllers/database-connection.php";
     }
 
-    public function listarPacientes()
+    public function listarPacientesEnTabla()
     {
         $query = "SELECT id_paciente, dni, nombre, apellido, apellido2 FROM paciente";
-
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
+        $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $stmt;
+        if (empty($pacientes)) {
+            return "<p>No hay pacientes disponibles.</p>";
+        }
+
+        $html = '<div class="container mt-5">
+                   
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID Paciente</th>
+                                <th>DNI</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Segundo Apellido</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+
+        foreach ($pacientes as $paciente) {
+            $html .= '<tr>
+                        <td>' . htmlspecialchars($paciente['id_paciente']) . '</td>
+                        <td>' . htmlspecialchars($paciente['dni']) . '</td>
+                        <td>' . htmlspecialchars($paciente['nombre']) . '</td>
+                        <td>' . htmlspecialchars($paciente['apellido']) . '</td>
+                        <td>' . htmlspecialchars($paciente['apellido2']) . '</td>
+                    </tr>';
+        }
+
+        $html .= '    </tbody>
+                    </table>
+                </div>';
+
+        return $html;
     }
 
     public function listarPacientesParaSelect()
@@ -136,12 +168,16 @@ class Paciente
         try {
             $query = "SELECT * FROM paciente 
                 WHERE id_paciente LIKE '$busqueda'
-                OR dni LIKE '$busqueda' 
+                OR dni LIKE '$busqueda'
+                OR nombre LIKE '$busqueda'
+                OR nombre2 LIKE '$busqueda'
+                OR apellido LIKE '$busqueda' 
+                OR apellido2 LIKE '$busqueda'
                 OR telefono LIKE '$busqueda'";
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            
+
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $resultado;
         } catch (PDOException $e) {
@@ -182,8 +218,8 @@ class Paciente
             $ultimoIdInsertado = $this->conn->lastInsertId();
 
             return [
-                "nombre" => $nombre." ".$nombre2,
-                "apellido" => $apellido." ".$apellido2,
+                "nombre" => $nombre . " " . $nombre2,
+                "apellido" => $apellido . " " . $apellido2,
                 "dni" => $dni,
                 "telefono" => $telefono,
             ];

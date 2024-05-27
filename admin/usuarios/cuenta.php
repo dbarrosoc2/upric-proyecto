@@ -15,7 +15,7 @@ $panelAdmin = true;
     $user = new Usuario(); ?>
 
     <main id="main" class="main">
-        <?php include '../../common/page-title.php';?>
+        <?php include '../../common/page-title.php'; ?>
 
         <div class="card">
             <div class="card-body">
@@ -70,13 +70,13 @@ $panelAdmin = true;
         </div>
 
         <?php
-            if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])) {
-                $user->editarUsuario($_SESSION['id_usuario'], $_POST['dni'],  $_POST['nombre'],  $_POST['apellido'],  $_POST['username'],  $_POST['num_colegiado']);
+        if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])) {
+            $user->editarUsuario($_SESSION['id_usuario'], $_POST['dni'],  $_POST['nombre'],  $_POST['apellido'],  $_POST['username'],  $_POST['num_colegiado'], $_SESSION['permiso']);
 
-                $modalTitle = "¡Usuario actualizado!";
-                $modalDescription = "Tus datos de usuario fueron  <strong>actualizados correctamente</strong>.";
-                include '../../common/modal-success.php';
-            }
+            $modalTitle = "¡Usuario actualizado!";
+            $modalDescription = "Tus datos de usuario fueron  <strong>actualizados correctamente</strong>.";
+            include '../../common/modal-success.php';
+        }
         ?>
     </main>
     <?php require_once __DIR__ . '/../../common/footer.php'; ?>

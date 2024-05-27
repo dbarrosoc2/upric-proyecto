@@ -30,6 +30,45 @@ class Usuario
         return $stmt;
     }
 
+    public function mostrarUsuarios()
+    {
+        // Usar el método leerPruebas para obtener todas los usuarios
+        $stmt = $this->leerUsuarios();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    // Método para leer las pruebas
+    public function leerUsuarios()
+    {
+        $query = "SELECT id_usuario, nombre, apellidos, dni, usuario, permiso, num_colegiado FROM " . $this->table_name;
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    public function obtenerUsuarioPorId($idUsuario)
+    {
+        try {
+            $query = "SELECT id_usuario, nombre, apellidos, dni, permiso, num_colegiado, usuario FROM " . $this->table_name . " WHERE id_usuario = :idUsuario";
+            $stmt = $this->conn->prepare($query);
+
+            // Vinculación del parámetro
+            $stmt->bindParam(":idUsuario", $idUsuario);
+
+            $stmt->execute();
+
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $resultado;
+        } catch (PDOException $e) {
+            die("Error: " . $e->getMessage() . "<br>");
+        }
+    }
+
     public function listarUsuarioParaSelect()
     {
         try {
@@ -54,42 +93,37 @@ class Usuario
 
 
     // Método para borrar un paciente
-    public function borrarUsuario($id)
+    public function borrarUsuario($id_usuario)
     {
-        if (!empty($id)) {
-            $id = limpiar($id);
-            // Primero, obtenemos los datos del paciente que se va a eliminar
-            $queryInfo = "SELECT dni, nombre, apellidos FROM " . $this->table_name . " WHERE id_usuario = :id";
-
+        if (!empty($id_usuario)) {
+            $id_usuario = limpiar($id_usuario);
             try {
                 session_start();
+                $queryInfo = "SELECT id, nombre, apellidoss FROM " . $this->table_name . " WHERE id_usuario = :id";
                 $stmtInfo = $this->conn->prepare($queryInfo);
-                $stmtInfo->bindParam(':id', $id);
+                $stmtInfo->bindParam(':id', $id_usuario);
                 $stmtInfo->execute();
-                $paciente = $stmtInfo->fetch(PDO::FETCH_ASSOC);
+                $prueba = $stmtInfo->fetch(PDO::FETCH_ASSOC);
 
-                if (!$paciente) {
-                    $_SESSION['error1'] = "No se encontró el paciente con el ID especificado.";
+                if (!$prueba) {
+                    $_SESSION['error1'] = "No se encontró la prueba con el ID especificado.";
                 } else {
-
-                    // Ahora, procedemos a eliminar el paciente
-                    $queryDelete = "DELETE FROM " . $this->table_name . " WHERE id_usuario = :id";
-                    $stmtDelete = $this->conn->prepare($queryDelete);
-                    $stmtDelete->bindParam(':id', $id);
-                    $resultado = $stmtDelete->execute();
+                    $query = "DELETE FROM {$this->table_name} WHERE id_usuario = :id_usuario";
+                    $stmt = $this->conn->prepare($query);
+                    $stmt->bindParam(":id_usuario", $id_usuario);
+                    $resultado = $stmt->execute();
                     if ($resultado) {
-                        // Utiliza una variable de sesión para almacenar el mensaje de éxito
 
-                        $_SESSION['mensaje'] = "<div class='alert alert-danger' role='alert'>Registro eliminado con éxito.\nDNI: " . $paciente['dni'] . "\nNombre: " . $paciente['nombre'] . "\nApellido: " . $paciente['apellido'] . "</div>";
-                        header("Location: ../../admin/pacientes/consultar.php");
+                        echo "deleted";
+                        exit();
                     } else {
                         // Mensaje de error
                         $_SESSION['error'] = "<div class='alert alert-danger' role='alert'>Error al eliminar el registro.</div>";
-                        header("Location: ../../admin/pacientes/consultar.php");
+                        header("Location: ../../admin/usuarios/consultarUsuarios.php");
                     }
                 }
             } catch (PDOException $e) {
-                die("Error al procesar la solicitud: " . $e->getMessage());
+                die("Error: " . $e->getMessage() . "<br>");
             }
         }
     }
@@ -140,19 +174,20 @@ class Usuario
 
 
     // Método para insertar un paciente
-    public function crearPaciente($nombre, $apellidos, $dni, $usuario, $clave, $num_colegiado)
+    public function crearUsuario($nombre, $apellidos, $dni, $usuario, $clave, $num_colegiado, $permiso)
     {
-        $query = "INSERT INTO " . $this->table_name . " (nombre, apellidos, dni, usuario, clave, num_colegiado) 
+        $query = "INSERT INTO " . $this->table_name . " (nombre, apellidos, dni, usuario, clave, permiso, num_colegiado) 
         VALUES (:nombre, :apellidos, :dni, :usuario, :clave, :permiso, :num_colegiado)";
 
         $stmt = $this->conn->prepare($query);
 
         // Vinculación de valores usando propiedades de clase
         $stmt->bindParam(":nombre", $nombre);
-        $stmt->bindParam(":apellido", $apellidos);
+        $stmt->bindParam(":apellidos", $apellidos); // Corregido
         $stmt->bindParam(":dni", $dni);
         $stmt->bindParam(":usuario", $usuario);
-        $stmt->bindParam(":clave", $clave);
+        $stmt->bindParam(":clave", $clave); // Corregido
+        $stmt->bindParam(":permiso", $permiso);
         $stmt->bindParam(":num_colegiado", $num_colegiado);
 
         if ($stmt->execute()) {
@@ -171,11 +206,12 @@ class Usuario
 
 
 
-    public function editarUsuario($id_usuario, $dni, $nombre, $apellidos, $usuario, $num_colegiado)
+
+    public function editarUsuario($id_usuario, $dni, $nombre, $apellidos, $usuario, $num_colegiado, $permiso)
     {
         try {
             $query = "UPDATE " . $this->table_name . " 
-                  SET dni=:dni, nombre=:nombre, apellidos=:apellidos, usuario=:usuario, num_colegiado=:num_colegiado
+                  SET dni=:dni, nombre=:nombre, apellidos=:apellidos, usuario=:usuario, num_colegiado=:num_colegiado, permiso=:permiso
                   WHERE id_usuario = :id_usuario";
 
             $stmt = $this->conn->prepare($query);
@@ -186,22 +222,48 @@ class Usuario
             $stmt->bindParam(":apellidos", $apellidos);
             $stmt->bindParam(":usuario", $usuario);
             $stmt->bindParam(":num_colegiado", $num_colegiado);
+            $stmt->bindParam(":permiso", $permiso);
             $stmt->bindParam(":id_usuario", $id_usuario);
 
             if ($stmt->execute()) {
-                // Repopular $_SESSION
-                $_SESSION['nombre'] = $nombre;
-                $_SESSION['apellido'] = $apellidos;
-                $_SESSION['usuario'] = $usuario;
-                $_SESSION['num_colegiado'] = $num_colegiado;
-                $_SESSION['dni'] = $dni;
+                return true;
+            } else {
+                return false;
             }
         } catch (PDOException $e) {
             die("Error al procesar la solicitud: " . $e->getMessage());
         }
     }
+    public function cambiarClavePrimera($id_usuario, $nueva_clave, $confirmar_clave)
+    {
+        try {
+            // Verificar si las nuevas contraseñas coinciden
+            if ($nueva_clave !== $confirmar_clave) {
+                // Las contraseñas no coinciden, devolver un mensaje de error
+                return "Las nuevas contraseñas no coinciden.";
+            }
 
-    public function cambiarClave($id_usuario, $usuario_actual, $nueva_clave, $confirmar_clave)
+            // Actualizar la contraseña en la base de datos con la nueva contraseña hasheada
+            $query_actualizacion = "UPDATE " . $this->table_name . " SET clave = :nueva_clave WHERE id_usuario = :id_usuario";
+            $stmt_actualizacion = $this->conn->prepare($query_actualizacion);
+            $stmt_actualizacion->bindParam(':nueva_clave', md5($confirmar_clave));
+            $stmt_actualizacion->bindParam(':id_usuario', $id_usuario);
+            $stmt_actualizacion->execute();
+            // Verificar si la actualización fue exitosa
+            if ($stmt_actualizacion->rowCount() > 0) {
+                // La contraseña se actualizó correctamente
+                return "La contraseña se ha actualizado correctamente.";
+            } else {
+                // No se pudo actualizar la contraseña
+                return "Error al actualizar la contraseña. Inténtalo de nuevo más tarde.";
+            }
+        } catch (PDOException $e) {
+            // Manejo de excepciones en caso de error de base de datos
+            return "Error al procesar la solicitud: " . $e->getMessage();
+        }
+    }
+
+    public function cambiarClave($id_usuario, $clave_actual, $nueva_clave, $confirmar_clave)
     {
         try {
             // Verificar si las nuevas contraseñas coinciden
@@ -211,10 +273,10 @@ class Usuario
             }
 
             // Verificar si el usuario actual y la contraseña actual coinciden
-            $query_verificacion = "SELECT clave FROM " . $this->table_name . " WHERE id_usuario = :id_usuario AND usuario = :usuario";
+            $query_verificacion = "SELECT clave FROM " . $this->table_name . " WHERE id_usuario = :id_usuario AND clave = :clave";
             $stmt_verificacion = $this->conn->prepare($query_verificacion);
             $stmt_verificacion->bindParam(':id_usuario', $id_usuario);
-            $stmt_verificacion->bindParam(':usuario', $usuario_actual);
+            $stmt_verificacion->bindParam(':clave', $clave_actual);
             $stmt_verificacion->execute();
             $usuario = $stmt_verificacion->fetch(PDO::FETCH_ASSOC);
 
@@ -223,13 +285,10 @@ class Usuario
                 return "Usuario o contraseña actual incorrectos.";
             }
 
-            // Hash de la nueva contraseña
-            $nueva_clave_hash = password_hash($nueva_clave, PASSWORD_DEFAULT);
-
-            // Actualizar la contraseña en la base de datos
+            // Actualizar la contraseña en la base de datos con la nueva contraseña hasheada
             $query_actualizacion = "UPDATE " . $this->table_name . " SET clave = :nueva_clave WHERE id_usuario = :id_usuario";
             $stmt_actualizacion = $this->conn->prepare($query_actualizacion);
-            $stmt_actualizacion->bindParam(':nueva_clave', $nueva_clave_hash);
+            $stmt_actualizacion->bindParam(':nueva_clave', $nueva_clave);
             $stmt_actualizacion->bindParam(':id_usuario', $id_usuario);
             $stmt_actualizacion->execute();
 
