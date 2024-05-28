@@ -1,18 +1,18 @@
 <?php
-    include '../../common/session-checker.php';
-    $title = "Modificar Paciente";
-    $description = "Editar datos personales de paciente";
-    $panelAdmin= true;
+include '../../common/session-checker.php';
+$title = "Modificar Paciente";
+$description = "Editar datos personales de paciente";
+$panelAdmin = true;
 
-    require_once "../../controllers/POO/CLASS/Paciente.php";
-    require '../../controllers/POO/CLASS/funciones.php';
-    $database = new Paciente();
-    if (isset($_GET['id'])) {
-        if (!empty($_GET['id'])) {
-            $id = $_GET['id'];
-            $datosPaciente = $database->obtenerPacientePorNumRegistro($id);
-        }
+require_once "../../controllers/POO/CLASS/Paciente.php";
+require '../../controllers/POO/CLASS/funciones.php';
+$database = new Paciente();
+if (isset($_GET['id_paciente'])) {
+    if (!empty($_GET['id_paciente'])) {
+        $id = $_GET['id_paciente'];
+        $datosPaciente = $database->obtenerPacientePorNumRegistro($id);
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -109,15 +109,11 @@
                             <label for="confirmatorio">Confirmatorio</label>
                             <div class="form-check__horizontal d-flex mt-2">
                                 <div class="form-check me-3">
-                                    <input class="form-check-input" type="radio" name="confirmatorio" id="confirmatorio_no" value="0"
-                                    <?= $datosPaciente['confirmatorio'] === 0 ? "checked" : ""  ?>
-                                    >
+                                    <input class="form-check-input" type="radio" name="confirmatorio" id="confirmatorio_no" value="0" <?= $datosPaciente['confirmatorio'] === 0 ? "checked" : ""  ?>>
                                     <label class="form-check-label" for="confirmatorio_no">No</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="confirmatorio" id="confirmatorio_si" value="1"
-                                    <?= $datosPaciente['confirmatorio'] === 1 ? "checked" : ""  ?>
-                                    >
+                                    <input class="form-check-input" type="radio" name="confirmatorio" id="confirmatorio_si" value="1" <?= $datosPaciente['confirmatorio'] === 1 ? "checked" : ""  ?>>
                                     <label class="form-check-label" for="confirmatorio_si">Si</label>
                                 </div>
                             </div>
@@ -155,8 +151,9 @@
 
     </main>
     <?php
-        $customScript = "pacientes.js";
-        require_once __DIR__ . '/../../common/footer.php';
+    $customScript = "pacientes.js";
+    require_once __DIR__ . '/../../common/footer.php';
     ?>
 </body>
+
 </html>

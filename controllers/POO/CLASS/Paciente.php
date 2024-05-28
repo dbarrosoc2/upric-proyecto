@@ -28,6 +28,26 @@ class Paciente
         $this->conn = require "../../controllers/database-connection.php";
     }
 
+    public function mostrarPacientes()
+    {
+        // Usar el método leerPruebas para obtener todas los usuarios
+        $stmt = $this->leerPacientes();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    // Método para leer las pruebas
+    public function leerPacientes()
+    {
+        $query = "SELECT id_paciente, dni, nombre, nombre2, apellido, apellido2, confirmatorio, fecha_confirmatorio, telefono, fecha_nac, estado, municipio, parroquia, calle, resto, hosp_ref, comentario  FROM " . $this->table_name;
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     public function listarPacientesEnTabla()
     {
         $query = "SELECT id_paciente, dni, nombre, apellido, apellido2 FROM paciente";
