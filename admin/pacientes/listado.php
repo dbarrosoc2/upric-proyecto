@@ -63,7 +63,7 @@ $panelAdmin = true;
                                         class="btn btn-outline-primary btnDelete" 
                                         data-delete-id="<?= $paciente['id_paciente'] ?>" 
                                         data-delete-name="<?= $paciente['nombre'] ?>" 
-                                        data-delete-url="../../controllers/POO/borrar-prueba-funcion.php" data-delete-type="paciente">
+                                        data-delete-url="../../controllers/POO/borrar-paciente-funcion.php" data-delete-type="paciente">
                                             <i 
                                             class="bi bi-trash-fill" 
                                             data-delete-id="<?= $paciente['id_paciente'] ?>"
