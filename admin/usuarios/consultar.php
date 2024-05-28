@@ -4,7 +4,7 @@ require_once '../../controllers/POO/CLASS//Usuarios.php';
 require_once "../../controllers/POO/CLASS/funciones.php";
 
 $title = "Listar Usuarios";
-$description = "Listado de todos los usuarios registrados en URPIC";
+$description = "Listado de todos los usuarios registrados en UPRIC";
 $panelAdmin = true;
 ?>
 <!DOCTYPE html>
@@ -23,8 +23,8 @@ $panelAdmin = true;
         <div class="card table-fixed-wrapper">
             <div class="card-body">
                 <?php
-                $pruebaInstance = new Usuario();
-                $pruebasData = $pruebaInstance->mostrarUsuarios();
+                $usuarioInstance = new Usuario();
+                $usuariosData = $usuarioInstance->mostrarUsuarios();
 
                 $modalPreguntaTitle = "Eliminar Usuario";
                 $modalPreguntaDescription = '¿Estás de acuerdo con eliminar El usuario <strong class="deleteName">Test</strong>? Esta operación no puede revertirse.';
@@ -42,21 +42,21 @@ $panelAdmin = true;
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($pruebasData as $prueba) { ?>
-                            <tr data-delete-row-id="<?= $prueba['id_usuario'] ?>">
-                                <td><?= $prueba['id_usuario'] ?></td>
-                                <td><?= $prueba['nombre'] ?></td>
-                                <td><?= $prueba['apellidos'] ?></td>
-                                <td><?= $prueba['usuario'] ?></td>
-                                <td><?= $prueba['permiso'] ?></td>
+                        <?php foreach ($usuariosData as $usuario) { ?>
+                            <tr data-delete-row-id="<?= $usuario['id_usuario'] ?>">
+                                <td><?= $usuario['id_usuario'] ?></td>
+                                <td><?= $usuario['nombre'] ?></td>
+                                <td><?= $usuario['apellidos'] ?></td>
+                                <td><?= $usuario['usuario'] ?></td>
+                                <td><?= $usuario['permiso'] ?></td>
                                 <td class="row-buttons">
                                     <div class="d-flex">
-                                        <a href="modificarUsuarios.php?id_prueba=<?= $prueba['id_usuario'] ?>" class="btn btn-outline-primary me-3">
+                                        <a href="modificarUsuarios.php?id_prueba=<?= $usuario['id_usuario'] ?>" class="btn btn-outline-primary me-3">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
 
-                                        <button class="btn btn-outline-primary btnDelete" data-delete-id="<?= $prueba['id_usuario'] ?>" data-delete-name="<?= $prueba['nombre'] ?>" data-delete-url="../../controllers/POO/borrar-usuario-funcion.php" data-delete-type="prueba">
-                                            <i class="bi bi-trash-fill" data-delete-id="<?= $prueba['id_usuario'] ?>" data-delete-name="<?= $prueba['nombre'] ?>" data-delete-url="../../controllers/POO/borrar-usuario-funcion.php" data-delete-type="prueba"></i>
+                                        <button class="btn btn-outline-primary btnDelete" data-delete-id="<?= $usuario['id_usuario'] ?>" data-delete-name="<?= $usuario['nombre'] ?>" data-delete-url="../../controllers/POO/borrar-usuario-funcion.php" data-delete-type="prueba">
+                                            <i class="bi bi-trash-fill" data-delete-id="<?= $usuario['id_usuario'] ?>" data-delete-name="<?= $usuario['nombre'] ?>" data-delete-url="../../controllers/POO/borrar-usuario-funcion.php" data-delete-type="prueba"></i>
                                         </button>
                                     </div>
                                 </td>

@@ -34,8 +34,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= $url_base ?>/admin/pacientes/listadoPaciente.php" class="<?php echo preg_match('(pacientes)', $_SERVER['REQUEST_URI']) && preg_match('(asignar)', $_SERVER['REQUEST_URI']) ? "active" : "" ?>">
-                            <i class="bi bi-circle"></i><span>Listado Pacientes</span>
+                        <a href="<?= $url_base ?>/admin/pacientes/listado.php" class="<?php echo preg_match('(pacientes)', $_SERVER['REQUEST_URI']) && preg_match('(listado)', $_SERVER['REQUEST_URI']) ? "active" : "" ?>">
+                            <i class="bi bi-circle"></i><span>Listado de pacientes</span>
                         </a>
                     </li>
                 </ul>

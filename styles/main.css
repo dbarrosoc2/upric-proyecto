@@ -1322,7 +1322,7 @@
   }
 
   .table-fixed-wrapper{
-    height: 42rem;
+    max-height: 72vh;
     overflow-y: auto;
   }
 
@@ -1345,6 +1345,7 @@
   }
   
   .table-fixed-wrapper table{
+    table-layout: fixed;
   }
   
   .table-fixed-wrapper table thead tr th{
@@ -1366,7 +1367,7 @@
   }
 
   .table-result tbody tr td{
-    font-size: 1rem;
+    font-size: .8rem;
     padding: 1.2rem .75rem;
     vertical-align: middle;
     border-bottom-color: rgba( var(--bs-custom-gray-rgb), .07);

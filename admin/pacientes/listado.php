@@ -3,7 +3,7 @@ include '../../common/session-checker.php';
 require_once '../../controllers/POO/CLASS//Paciente.php';
 require_once "../../controllers/POO/CLASS/funciones.php";
 
-$title = "Listado Pacientes";
+$title = "Listado de pacientes";
 $description = "Listado de todas los pacientes registrados en URPIC";
 $panelAdmin = true;
 ?>
