@@ -163,8 +163,19 @@ const handleEliminarBtn = async () => {
 
     try {
         const data = new URLSearchParams();
+        let mensaje;
 
-        deleteType === "paciente" ? data.append('id_paciente', deleteId)  :  data.append('id_prueba', deleteId)
+        if(deleteType === "paciente"){
+          data.append('id_paciente', deleteId)
+          mensaje = `<i class="bi bi-check-circle me-1"></i>El paciente <strong class="me-2 ms-2">${deleteName}</strong> fue eliminado correctamente.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>` 
+        }else if(deleteType === "prueba"){
+          data.append('id_prueba', deleteId)
+          mensaje = `<i class="bi bi-check-circle me-1"></i>La prueba <strong class="me-2 ms-2">${deleteName}</strong> fue eliminada correctamente.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+        }else if(deleteType === "usuario"){
+          data.append('id_usuario', deleteId)
+          mensaje = `<i class="bi bi-check-circle me-1"></i>El usuario <strong class="me-2 ms-2">${deleteName}</strong> fue eliminado correctamente.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+        }
+
         const result = await fetch(deleteURL, {
             method: 'POST',
             body: data
@@ -175,18 +186,11 @@ const handleEliminarBtn = async () => {
             let alertElement = document.createElement("div");
             alertElement.classList.add("alert", "alert-success", "alert-dismissible", "fade", "show");
             alertElement.setAttribute("role", "alert");
-            alertElement.innerHTML = (deleteType === "paciente") 
-            ? `<i class="bi bi-check-circle me-1"></i>El paciente <strong class="me-2 ms-2">${deleteName}</strong> fue eliminado correctamente.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>` 
-            : `<i class="bi bi-check-circle me-1"></i>La prueba <strong class="me-2 ms-2">${deleteName}</strong> fue eliminada correctamente.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+            alertElement.innerHTML = mensaje;
 
-            // if(deleteType === "paciente"){
-            //     document.querySelector(".listPacientes").remove();
-            //     document.querySelector("form").appendChild(alertElement);
-            //   }else{
-                document.querySelector(`table tbody tr[data-delete-row-id="${deleteId}"]`).remove();
-                document.querySelector("table").parentElement.prepend(alertElement);
-                document.querySelector(".card").scrollTo({top: 0, behavior: 'smooth'});
-            // }
+            document.querySelector(`table tbody tr[data-delete-row-id="${deleteId}"]`).remove();
+            document.querySelector("table").parentElement.prepend(alertElement);
+            document.querySelector(".card").scrollTo({top: 0, behavior: 'smooth'});
         }
     } catch (error) {
         console.log(error)

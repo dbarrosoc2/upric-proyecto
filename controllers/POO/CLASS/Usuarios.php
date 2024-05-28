@@ -99,13 +99,13 @@ class Usuario
             $id_usuario = limpiar($id_usuario);
             try {
                 session_start();
-                $queryInfo = "SELECT id, nombre, apellidoss FROM " . $this->table_name . " WHERE id_usuario = :id";
+                $queryInfo = "SELECT id_usuario, nombre, apellidos FROM {$this->table_name} WHERE id_usuario = :id";
                 $stmtInfo = $this->conn->prepare($queryInfo);
                 $stmtInfo->bindParam(':id', $id_usuario);
                 $stmtInfo->execute();
-                $prueba = $stmtInfo->fetch(PDO::FETCH_ASSOC);
+                $datos = $stmtInfo->fetch(PDO::FETCH_ASSOC);
 
-                if (!$prueba) {
+                if (!$datos) {
                     $_SESSION['error1'] = "No se encontró la prueba con el ID especificado.";
                 } else {
                     $query = "DELETE FROM {$this->table_name} WHERE id_usuario = :id_usuario";

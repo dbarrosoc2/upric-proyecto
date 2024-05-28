@@ -32,7 +32,13 @@ if (isset($_GET['id_prueba']) && !empty($_GET['id_prueba'])) {
                 ?>
                     <form id="formulario" class="row g-4 needs-validation" novalidate action="../../controllers/POO/usuario-editar.php" method="post">
                         <input type='hidden' name='id_usuario' value="<?php echo htmlspecialchars($datosPrueba['id_usuario']); ?>">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-floating">
+                                <input type="text" name="dni" class="form-control" value="<?php echo htmlspecialchars($datosPrueba['dni']); ?>" required placeholder="DNI">
+                                <label for="dni">DNI</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-floating">
                                 <input type="text" name="nombre" class="form-control" value="<?php echo htmlspecialchars($datosPrueba['nombre']); ?>" required placeholder="Nombre">
                                 <label for="nombre">Nombre</label>
@@ -46,23 +52,17 @@ if (isset($_GET['id_prueba']) && !empty($_GET['id_prueba'])) {
                         </div>
                         <div class="col-md-3">
                             <div class="form-floating">
-                                <input type="text" name="dni" class="form-control" value="<?php echo htmlspecialchars($datosPrueba['dni']); ?>" required placeholder="DNI">
-                                <label for="dni">DNI</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-floating">
                                 <input type="text" name="usuario" class="form-control" value="<?php echo htmlspecialchars($datosPrueba['usuario']); ?>" required placeholder="Usuario">
                                 <label for="usuario">Usuario</label>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-6">
                             <div class="form-floating">
                                 <input type="text" name="permiso" class="form-control" value="<?php echo htmlspecialchars($datosPrueba['permiso']); ?>" required placeholder="Permiso">
                                 <label for="permiso">Permiso</label>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-6">
                             <div class="form-floating">
                                 <input type="text" name="num_colegiado" class="form-control" value="<?php echo htmlspecialchars($datosPrueba['num_colegiado']); ?>" required placeholder="Numero Colegiado">
                                 <label for="num_colegiado">Numero Colegiado</label>

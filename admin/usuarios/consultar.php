@@ -51,12 +51,20 @@ $panelAdmin = true;
                                 <td><?= $usuario['permiso'] ?></td>
                                 <td class="row-buttons">
                                     <div class="d-flex">
-                                        <a href="modificarUsuarios.php?id_prueba=<?= $usuario['id_usuario'] ?>" class="btn btn-outline-primary me-3">
+                                        <a href="modificar.php?id_prueba=<?= $usuario['id_usuario'] ?>" class="btn btn-outline-primary me-3">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
 
-                                        <button class="btn btn-outline-primary btnDelete" data-delete-id="<?= $usuario['id_usuario'] ?>" data-delete-name="<?= $usuario['nombre'] ?>" data-delete-url="../../controllers/POO/borrar-usuario-funcion.php" data-delete-type="prueba">
-                                            <i class="bi bi-trash-fill" data-delete-id="<?= $usuario['id_usuario'] ?>" data-delete-name="<?= $usuario['nombre'] ?>" data-delete-url="../../controllers/POO/borrar-usuario-funcion.php" data-delete-type="prueba"></i>
+                                        <button 
+                                        class="btn btn-outline-primary btnDelete" 
+                                        data-delete-id="<?= $usuario['id_usuario'] ?>" 
+                                        data-delete-name="<?= $usuario['nombre'] ?>" 
+                                        data-delete-url="../../controllers/POO/borrar-usuario-funcion.php" data-delete-type="usuario">
+                                            <i 
+                                            class="bi bi-trash-fill" 
+                                            data-delete-id="<?= $usuario['id_usuario'] ?>" 
+                                            data-delete-name="<?= $usuario['nombre'] ?>" 
+                                            data-delete-url="../../controllers/POO/borrar-usuario-funcion.php" data-delete-type="usuario"></i>
                                         </button>
                                     </div>
                                 </td>
