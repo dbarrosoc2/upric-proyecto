@@ -27,7 +27,7 @@ class Prueba_Paciente
                 exit();
             }
 
-                        // Imprimir los datos si se encontró una prueba con el ID dado
+            // Imprimir los datos si se encontró una prueba con el ID dado
             echo
             "<div class='alert alert-info'>
                 <i class='bi bi-info-circle'></i>
@@ -60,7 +60,7 @@ class Prueba_Paciente
             $stmt_nombre_paciente->bindParam(':id_paciente', $id_paciente);
             $stmt_nombre_paciente->execute();
             $nombrePaciente = $stmt_nombre_paciente->fetch();
-            $pruebasData = array("fecha"=> $fecha_toma_muestra, "paciente"=> "{$nombrePaciente["nombre"]} {$nombrePaciente["apellido"]}", "pruebas"=> []);
+            $pruebasData = array("fecha" => $fecha_toma_muestra, "paciente" => "{$nombrePaciente["nombre"]} {$nombrePaciente["apellido"]}", "pruebas" => []);
 
 
             foreach ($pruebas_array_id as $id_prueba) {
@@ -238,27 +238,27 @@ class Prueba_Paciente
             // Obtener información del paciente y los resultados de las pruebas
             require_once('TCPDF-main/tcpdf.php');
             $stmt = $this->conn->prepare("
-            SELECT 
-                p.nombre_prueba, 
-                p.valor_ref_min, 
-                p.valor_ref_max, 
-                p.unidades, 
-                pp.resultado, 
-                pp.fecha_toma_muestra, 
-                pa.nombre, 
-                pa.apellido, 
-                pa.fecha_nac
-            FROM 
-                prueba AS p
-            JOIN 
-                prueba_paciente AS pp ON p.id_prueba = pp.id_prueba
-            JOIN 
-                paciente AS pa ON pp.id_paciente = pa.id_paciente
-            WHERE
-                pa.id_paciente = :idPaciente 
-                AND pp.fecha_toma_muestra = :fecha 
-                AND pp.resultado IS NOT NULL
-        ");
+        SELECT 
+            p.nombre_prueba, 
+            p.valor_ref_min, 
+            p.valor_ref_max, 
+            p.unidades, 
+            pp.resultado, 
+            pp.fecha_toma_muestra, 
+            pa.nombre, 
+            pa.apellido, 
+            pa.fecha_nac
+        FROM 
+            prueba AS p
+        JOIN 
+            prueba_paciente AS pp ON p.id_prueba = pp.id_prueba
+        JOIN 
+            paciente AS pa ON pp.id_paciente = pa.id_paciente
+        WHERE
+            pa.id_paciente = :idPaciente 
+            AND pp.fecha_toma_muestra = :fecha 
+            AND pp.resultado IS NOT NULL
+    ");
             $stmt->bindParam(':idPaciente', $idPaciente);
             $stmt->bindParam(':fecha', $fecha);
             $stmt->execute();
@@ -273,53 +273,77 @@ class Prueba_Paciente
 
             // Definir el logo como marca de agua
             $pdf->SetAlpha(0.1);
-            $pdf->Image('./1.png', 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
+            $pdf->Image('./CLASS/1.jpg', 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
             $pdf->SetAlpha(1);
 
-            // Agregar título
-            $pdf->Cell(0, 10, 'CORPORACION DE SALUD DEL ESTADO ARAGUA (CORPOSALUD)', 0, 1, 'C');
-            $pdf->Cell(0, 10, 'Ambulatorio Urbano Dr. Efraín Abad Armas', 0, 1, 'C');
-            $pdf->Cell(0, 10, 'UNIDAD PROGRAMÁTICA REGIONAL DE INMUNOLOGÍA CLÍNICA (UPRIC)', 0, 1, 'C');
+            // Agregar imagen de logo genérico con tamaño reducido
+            $logo = './CLASS/1.jpg'; // Nombre del archivo del logo
+            if (file_exists($logo)) {
+                $pdf->Image($logo, 10, 10, 18, 18, '', '', '', false, 300, '', false, false, 0);
+            }
+
+            // Agregar título con interlineado ajustado
+            $pdf->Cell(0, 5, 'CORPORACION DE SALUD DEL ESTADO ARAGUA (CORPOSALUD)', 0, 1, 'C');
+            $pdf->Cell(0, 5, 'Ambulatorio Urbano Dr. Efraín Abad Armas', 0, 1, 'C');
+            $pdf->Cell(0, 5, 'UNIDAD PROGRAMÁTICA REGIONAL DE INMUNOLOGÍA CLÍNICA (UPRIC)', 0, 1, 'C');
+            $pdf->Ln(5); // Espacio pequeño antes de la línea
+
+            // Imprimir una línea
+            $pdf->Cell(0, 0, '', 'T'); // Línea horizontal
 
             // Imprimir encabezado con información del paciente
             if (!empty($result)) {
                 $nombreCompleto = $result[0]['nombre'] . ' ' . $result[0]['apellido'];
                 $fechaNacimiento = new DateTime($result[0]['fecha_nac']);
                 $edad = $fechaNacimiento->diff(new DateTime('now'))->y;
+
                 // Imprimir nombre, edad y fecha de toma de muestra
+                $pdf->Ln(5); // Espacio pequeño antes de la información del paciente
                 $pdf->MultiCell(0, 10, 'Nombre: ' . $nombreCompleto . ' - Edad: ' . $edad . ' años');
                 $pdf->Cell(0, 10, 'Fecha de toma de muestra: ' . $result[0]['fecha_toma_muestra'], 0, 1);
+
                 // Crear tabla para los resultados de las pruebas
                 $pdf->Ln(); // Agregar espacio antes de la tabla
                 $pdf->SetFont('helvetica', 'B', 12); // Establecer fuente en negrita para encabezados de tabla
-                $pdf->Cell(45, 10, 'Prueba', 1, 0, 'C');
-                $pdf->Cell(30, 10, 'Resultado', 1, 0, 'C');
-                $pdf->Cell(30, 10, 'Valor Min', 1, 0, 'C');
-                $pdf->Cell(30, 10, 'Valor Max', 1, 0, 'C');
-                $pdf->Cell(35, 10, 'Unidades', 1, 1, 'C');
+                $pdf->Cell(45, 10, 'Prueba', 0, 0, 'C');
+                $pdf->Cell(30, 10, 'Resultado', 0, 0, 'C');
+                $pdf->Cell(30, 10, 'Valor Min', 0, 0, 'C');
+                $pdf->Cell(30, 10, 'Valor Max', 0, 0, 'C');
+                $pdf->Cell(35, 10, 'Unidades', 0, 1, 'C');
                 $pdf->SetFont('helvetica', '', 12); // Restaurar fuente normal
+
                 // Imprimir resultados de las pruebas en la tabla
                 foreach ($result as $row) {
-                    $pdf->Cell(45, 10, $row['nombre_prueba'], 1, 0, 'C');
-                    $pdf->Cell(30, 10, $row['resultado'], 1, 0, 'C');
-                    $pdf->Cell(30, 10, $row['valor_ref_min'], 1, 0, 'C');
-                    $pdf->Cell(30, 10, $row['valor_ref_max'], 1, 0, 'C');
-                    $pdf->Cell(35, 10, $row['unidades'], 1, 1, 'C');
+                    $pdf->Cell(45, 10, $row['nombre_prueba'], 0, 0, 'C');
+                    $pdf->Cell(30, 10, $row['resultado'], 0, 0, 'C');
+                    $pdf->Cell(30, 10, $row['valor_ref_min'], 0, 0, 'C');
+                    $pdf->Cell(30, 10, $row['valor_ref_max'], 0, 0, 'C');
+                    $pdf->Cell(35, 10, $row['unidades'], 0, 1, 'C');
                 }
+
                 // Agregar información del bioanalista para la firma
                 $pdf->Ln(10); // Espacio antes de la información del bioanalista
                 $pdf->Cell(0, 10, 'Bioanalista:', 0, 1, 'L');
                 $pdf->Cell(0, 10, $_SESSION['nombre'] . ' ' . $_SESSION['apellido'] . ' - Colegiado: ' . $_SESSION['num_colegiado'], 0, 1, 'L');
             } else {
-                $pdf->Cell(0, 10, 'No se encontraron resultados válidos para el paciente con ID ' . $idPaciente, 0, 1);
+                // Imprimir mensaje de no se encontraron resultados válidos
+                $pdf->Ln(10); // Espacio antes del mensaje
+                $pdf->SetFont('helvetica', 'B', 12); // Establecer fuente en negrita
+                $pdf->MultiCell(0, 10, 'No se encontraron resultados válidos para el paciente con ID ' . $idPaciente, 0, 'C');
             }
 
             // Salida del PDF
-            $pdf->Output('resultado_pruebas.pdf', 'I','_blank');
+            $pdf->Output('resultado_pruebas.pdf', 'I', '_blank');
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
+
+
+
+
+
+
 
     public function __destruct()
     {
