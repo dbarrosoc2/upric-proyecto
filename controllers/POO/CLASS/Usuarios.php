@@ -191,16 +191,7 @@ class Usuario
         $stmt->bindParam(":num_colegiado", $num_colegiado);
 
         if ($stmt->execute()) {
-            $ultimoIdInsertado = $this->conn->lastInsertId();
-            // Impresión de los valores de las propiedades del paciente
-            echo "<div class='alert alert-success' role='alert'>  
-            Usuario creado con éxito con los siguientes datos:<br>
-            El último ID insertado es: $ultimoIdInsertado<br>
-            DNI: $dni<br>
-            Nombre: $nombre <br>
-            Apellido: $apellidos<br>
-            Usuario: $usuario<br>         
-            </div>";
+            return $ultimoIdInsertado = $this->conn->lastInsertId();
         }
     }
 

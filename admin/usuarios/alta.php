@@ -20,13 +20,13 @@ $panelAdmin = true;
         <div class="card">
             <div class="card-body">
                 <form class="row g-4 needs-validation" novalidate action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-floating">
                             <input type="text" value="<?= isset($dni) ? $dni : ""  ?>" class="form-control" id="dni" name="dni" placeholder="DNI" maxlength="50" required>
                             <label for="dni">DNI</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-floating">
                             <input type="text" class="form-control" value="<?= isset($nombre) ? $nombre :  '' ?>" id="nombre" placeholder="Nombre" name="nombre" required>
                             <label for="nombre">Nombre</label>
@@ -38,25 +38,29 @@ $panelAdmin = true;
                             <label for="Apellidos">Apellidos</label>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="usuario" value="<?= isset($usuario) ? $usuario : '' ?>" name="usuario" placeholder="usuario" required>
                             <label for="usuario">Usuario</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="permiso" value="<?= isset($permiso) ? $permiso : '' ?>" name="permiso" required>
-                            <label for="permiso">permiso</label>
+                            <label for="permiso">Permiso</label>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" value="<?= isset($numeroColegiado) ? $numeroColegiado : '' ?>" id="numeroColegiado" name="numeroColegiado" placeholder="numeroColegiado" required>
                             <label for="numeroColegiado">Numero Colegiado</label>
                         </div>
                     </div>
-                    <label for="nada">Para el primer inicio se session la contraseña sera el mismo DNI del usuario</label>
+                    <div class="col-md-12">
+                        <div class='alert alert-warning' role='alert'>
+                            <i class='bi bi-exclamation-triangle'></i> Para el primer inicio de sesión la contraseña sera el mismo DNI del usuario
+                        </div>
+                    </div>
                     <div class="col-12 d-flex justify-content-md-end">
                         <button type="submit" class="btn btn-primary" name="submit">Dar de alta a usuario</button>
                     </div>
@@ -79,13 +83,12 @@ $panelAdmin = true;
             $usuarioCreadoData = $database->crearUsuario($nombre, $apellidos, $dni, $usuario, md5($usuario), $numeroColegiado, $permiso);
 
             $modalTitle = "¡Nuevo usuario creado!";
-            $modalDescription = "El usuario <strong>{$usuario} </strong>, fue registrado correctamente.";
+            $modalDescription = "El usuario <strong>{$usuario}</strong> (ID {$usuarioCreadoData}), fue registrado correctamente.";
             include '../../common/modal-success.php';
         }
         ?>
     </main>
     <?php
-    $customScript = "pacientes.js";
     require_once __DIR__ . '/../../common/footer.php';
     ?>
 </body>
