@@ -119,7 +119,7 @@ class Usuario
                     } else {
                         // Mensaje de error
                         $_SESSION['error'] = "<div class='alert alert-danger' role='alert'>Error al eliminar el registro.</div>";
-                        header("Location: ../../admin/usuarios/consultarUsuarios.php");
+                        header("Location: ../../admin/usuarios/consultars.php");
                     }
                 }
             } catch (PDOException $e) {
@@ -128,7 +128,7 @@ class Usuario
         }
     }
 
-    public function consultarUsuario($busqueda)
+    public function consultar($busqueda)
     {
         try {
             $query = "SELECT id_usuario, dni, nombre, apellidos, usuario, permiso, num_colegiado

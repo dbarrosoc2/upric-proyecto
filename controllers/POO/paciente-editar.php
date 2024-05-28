@@ -24,6 +24,6 @@ if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
             $_SESSION['error'] = "Error al actualizar el usuario.";
         }
 
-        header("Location: ../../admin/usuarios/consultarUsuario.php");
+        header("Location: ../../admin/usuarios/consultar.php");
     }
 }

@@ -170,8 +170,8 @@ $panelAdmin = true
                         <h6>Opciones</h6>
                       </li>
 
-                      <li><a class="dropdown-item" href="./usuarios/altaUsuarios.php">Añadir Usuarios</a></li>
-                      <li><a class="dropdown-item" href="./usuarios/consultarUsuario.php">Editar/Eliminar Usuarios</a></li>
+                      <li><a class="dropdown-item" href="./usuarios/alta.php">Añadir Usuarios</a></li>
+                      <li><a class="dropdown-item" href="./usuarios/consultar.php">Editar/Eliminar Usuarios</a></li>
                       <li><a class="dropdown-item" href="./usuarios/cuenta.php">Mi cuenta</a></li>
                     </ul>
                   </div>
