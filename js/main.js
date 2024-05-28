@@ -179,14 +179,14 @@ const handleEliminarBtn = async () => {
             ? `<i class="bi bi-check-circle me-1"></i>El paciente <strong class="me-2 ms-2">${deleteName}</strong> fue eliminado correctamente.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>` 
             : `<i class="bi bi-check-circle me-1"></i>La prueba <strong class="me-2 ms-2">${deleteName}</strong> fue eliminada correctamente.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
 
-            if(deleteType === "paciente"){
-                document.querySelector(".listPacientes").remove();
-                document.querySelector("form").appendChild(alertElement);
-              }else{
+            // if(deleteType === "paciente"){
+            //     document.querySelector(".listPacientes").remove();
+            //     document.querySelector("form").appendChild(alertElement);
+            //   }else{
                 document.querySelector(`table tbody tr[data-delete-row-id="${deleteId}"]`).remove();
                 document.querySelector("table").parentElement.prepend(alertElement);
                 document.querySelector(".card").scrollTo({top: 0, behavior: 'smooth'});
-            }
+            // }
         }
     } catch (error) {
         console.log(error)

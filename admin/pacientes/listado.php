@@ -4,7 +4,7 @@ require_once '../../controllers/POO/CLASS//Paciente.php';
 require_once "../../controllers/POO/CLASS/funciones.php";
 
 $title = "Listado de pacientes";
-$description = "Listado de todas los pacientes registrados en URPIC";
+$description = "Listado de todas los pacientes registrados en UPRIC";
 $panelAdmin = true;
 ?>
 <!DOCTYPE html>
@@ -23,8 +23,8 @@ $panelAdmin = true;
         <div class="card table-fixed-wrapper">
             <div class="card-body">
                 <?php
-                $pruebaInstance = new paciente();
-                $pruebasData = $pruebaInstance->mostrarPacientes();
+                $pacienteInstance = new paciente();
+                $pacientesData = $pacienteInstance->mostrarPacientes();
 
                 $modalPreguntaTitle = "Eliminar Paciente";
                 $modalPreguntaDescription = '¿Estás de acuerdo con eliminar el paciente <strong class="deleteName">Test</strong>? Esta operación no puede revertirse.';
@@ -44,23 +44,31 @@ $panelAdmin = true;
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($pruebasData as $prueba) { ?>
-                            <tr data-delete-row-id="<?= $prueba['id_paciente'] ?>">
+                        <?php foreach ($pacientesData as $paciente) { ?>
+                            <tr data-delete-row-id="<?= $paciente['id_paciente'] ?>">
 
-                                <td><?= $prueba['dni'] ?></td>
-                                <td><?= $prueba['nombre'] . "  " . $prueba['nombre2'] ?></td>
-                                <td><?= $prueba['apellido'] . "  " . $prueba['apellido2'] ?></td>
-                                <td><?= $prueba['estado'] . " " . $prueba['municipio'] . " " . $prueba['parroquia'] . " " . $prueba['calle'] . " " . $prueba['resto'] ?></td>
-                                <td><?= $prueba['hosp_ref'] ?></td>
-                                <td><?= $prueba['comentario'] ?></td>
+                                <td><?= $paciente['dni'] ?></td>
+                                <td><?= $paciente['nombre'] . "  " . $paciente['nombre2'] ?></td>
+                                <td><?= $paciente['apellido'] . "  " . $paciente['apellido2'] ?></td>
+                                <td><?= $paciente['estado'] . " " . $paciente['municipio'] . " " . $paciente['parroquia'] . " " . $paciente['calle'] . " " . $paciente['resto'] ?></td>
+                                <td><?= $paciente['hosp_ref'] ?></td>
+                                <td><?= $paciente['comentario'] ?></td>
                                 <td class="row-buttons">
                                     <div class="d-flex">
-                                        <a href="modificar.php?id_paciente=<?= $prueba['id_paciente'] ?>" class="btn btn-outline-primary me-3">
+                                        <a href="modificar.php?id_paciente=<?= $paciente['id_paciente'] ?>" class="btn btn-outline-primary me-3">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
 
-                                        <button class="btn btn-outline-primary btnDelete" data-delete-id="<?= $prueba['id_paciente'] ?>" data-delete-name="<?= $prueba['nombre'] ?>" data-delete-url="../../controllers/POO/borrar-prueba-funcion.php" data-delete-type="prueba">
-                                            <i class="bi bi-trash-fill" data-delete-id="<?= $prueba['id_paciente'] ?>" data-delete-name="<?= $prueba['nombre'] ?>" data-delete-url="../../controllers/POO/borrar-paciente-funcion.php" data-delete-type="prueba"></i>
+                                        <button 
+                                        class="btn btn-outline-primary btnDelete" 
+                                        data-delete-id="<?= $paciente['id_paciente'] ?>" 
+                                        data-delete-name="<?= $paciente['nombre'] ?>" 
+                                        data-delete-url="../../controllers/POO/borrar-prueba-funcion.php" data-delete-type="paciente">
+                                            <i 
+                                            class="bi bi-trash-fill" 
+                                            data-delete-id="<?= $paciente['id_paciente'] ?>"
+                                            data-delete-name="<?= $paciente['nombre'] ?>" 
+                                            data-delete-url="../../controllers/POO/borrar-paciente-funcion.php" data-delete-type="paciente"></i>
                                         </button>
                                     </div>
                                 </td>

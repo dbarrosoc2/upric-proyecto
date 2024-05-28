@@ -1322,7 +1322,7 @@
   }
 
   .table-fixed-wrapper{
-    max-height: 72vh;
+    max-height: 60vh;
     overflow-y: auto;
   }
 

@@ -149,7 +149,7 @@ class Paciente
         if (!empty($id)) {
             $id = limpiar($id);
             // Primero, obtenemos los datos del paciente que se va a eliminar
-            $queryInfo = "SELECT dni, nombre, apellido FROM " . $this->table_name . " WHERE id_paciente = :id";
+            $queryInfo = "SELECT dni, nombre, apellido FROM {$this->table_name} WHERE id_paciente = :id";
 
             try {
                 session_start();

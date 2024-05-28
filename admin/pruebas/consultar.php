@@ -4,7 +4,7 @@
     require_once "../../controllers/POO/CLASS/funciones.php";
 
     $title = "Listar pruebas";
-    $description = "Listado de todas las pruebas registradas en URPIC";
+    $description = "Listado de todas las pruebas registradas en UPRIC";
     $panelAdmin = true;
 ?>
 <!DOCTYPE html>
