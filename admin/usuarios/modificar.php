@@ -79,29 +79,6 @@ if (isset($_GET['id_prueba']) && !empty($_GET['id_prueba'])) {
                 ?>
             </div>
         </div>
-
-        <!-- <section class="section dashboard">
-      <form action='../../controllers/POO/prueba-editar.php' method='POST'>
-        <input type='hidden' name='id_prueba' value="<?php echo htmlspecialchars($datosPrueba['id_prueba']); ?>">
-        <div class="form-group">
-          <label for="nombre_prueba">Nombre de la Prueba</label>
-          <input type='text' class="form-control" name='nombre_prueba' value="<?php echo htmlspecialchars($datosPrueba['nombre_prueba']); ?>">
-        </div>
-        <div class="form-group">
-          <label for="valor_ref_min">Valor Ref. Mínimo</label>
-          <input type='text' class="form-control" name='valor_ref_min' value="<?php echo htmlspecialchars($datosPrueba['valor_ref_min']); ?>">
-        </div>
-        <div class="form-group">
-          <label for="valor_ref_max">Valor Ref. Máximo</label>
-          <input type='text' class="form-control" name='valor_ref_max' value="<?php echo htmlspecialchars($datosPrueba['valor_ref_max']); ?>">
-        </div>
-        <div class="form-group">
-          <label for="unidades">Unidades</label>
-          <input type='text' class="form-control" name='unidades' value="<?php echo htmlspecialchars($datosPrueba['unidades']); ?>">
-        </div>
-        <button type='submit' name='accion' value="editar" class='btn btn-primary'>Actualizar Prueba</button>
-      </form>
-    </section> -->
     </main>
     <?php require_once __DIR__ . '/../../common/footer.php'; ?>
 </body>
