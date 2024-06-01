@@ -1,12 +1,9 @@
 <?php
-var_dump($_POST);
-
-require_once "../../controllers/POO/CLASS/Paciente.php";
 $database = new Paciente();
-require '../../controllers/POO/CLASS/funciones.php';
+require_once "../../controllers/POO/CLASS/Paciente.php";
+require_once '../../controllers/POO/CLASS/funciones.php';
 
 if (isset($_POST['modificar_submit'])) {
-
         $id_paciente = limpiar($_POST['id_paciente']);
         $dni = limpiar($_POST['dni']);
         $nombre = limpiar($_POST['nombre']);

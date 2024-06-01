@@ -280,7 +280,7 @@ class Paciente
         $resto = limpiar($resto);
         $hospital_referencia = limpiar($hospital_referencia);
         $comentario = limpiar($comentario);
-        $query = "UPDATE " . $this->table_name . " 
+        $query = "UPDATE {$this->table_name}
     SET dni=:dni, nombre=:nombre, nombre2=:nombre2, apellido=:apellido, apellido2=:apellido2, confirmatorio=:confirmatorio, fecha_confirmatorio=:fecha_confirmatorio,
     telefono=:telefono, fecha_nac=:fecha_nacimiento, estado=:estado, municipio=:municipio, parroquia=:parroquia, calle=:calle, resto=:resto, hosp_ref=:hospital_referencia, comentario=:comentario
     WHERE id_paciente = :id_paciente";
@@ -310,7 +310,7 @@ class Paciente
             session_start();
 
             // Guardar el mensaje en $_SESSION
-            $_SESSION['mensaje'] = $nombre . " " . $apellido;
+            $_SESSION['mensaje'] = "$nombre $apellido";
         }
     }
 }
