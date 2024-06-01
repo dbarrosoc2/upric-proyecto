@@ -99,7 +99,7 @@
                                         <?=  $database->imprimirPruebaPorId($id_prueba);?>
                                     </div>
                                     <?php foreach ($pacientes as $paciente) { ?>
-                                        <div class="col-md-12 mb-2 ">
+                                        <div class="col-sm-12 col-md-12 mb-2 ">
                                             <span class="fw-bold">Paciente <?= $paciente['nombre']. " " . $paciente['apellido'] ?></span>  
                                             <span class="fw-light">(ID: <?= $paciente['id_paciente'] ?>)</span>
 
@@ -107,7 +107,7 @@
                                             <input type='hidden' name="<?="paciente_nombre[{$paciente['id']}]"?>" value="<?= $paciente['nombre'] ?>">
                                             <input type='hidden' name="<?="paciente_apellido[{$paciente['id']}]"?>" value="<?= $paciente['apellido'] ?>">
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-sm-12 col-md-3 mb-3 mb-md-0">
                                             <div class="form-floating form-floating-light">
                                                 <input 
                                                     type="text" class="form-control form-control-sm" 
@@ -118,7 +118,7 @@
                                                 <label for="<?="resultado_{$paciente['id']}"?>">Resultado de prueba</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-sm-12 col-md-9">
                                             <div class="form-floating form-floating-light">
                                                 <input 
                                                     type="text" 
