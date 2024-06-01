@@ -16,7 +16,4 @@
     <div class="col-12">
         <button class="btn btn-primary w-100" type="submit">Acceder a área de usuario</button>
     </div>
-    <div class="col-12">
-        <p class="small mb-0">Si no tienes una cuenta <a href="#">Registrate aquí</a></p>
-    </div>
 </form>
