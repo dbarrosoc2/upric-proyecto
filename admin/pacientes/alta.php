@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="text" class="form-control" value="<?= isset($nombre2) ? $nombre2 :  '' ?>" id="nombre2" placeholder="2do Nombre" name="nombre2" required>
+                            <input type="text" class="form-control" value="<?= isset($nombre2) ? $nombre2 :  '' ?>" id="nombre2" placeholder="2do Nombre" name="nombre2">
                             <label for="nombre2">2do Nombre</label>
                         </div>
                     </div>

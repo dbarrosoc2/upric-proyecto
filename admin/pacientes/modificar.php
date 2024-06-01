@@ -46,7 +46,7 @@ if (isset($_GET['id_paciente'])) {
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating">
-                                <input type="text" class="form-control" value="<?= htmlspecialchars($datosPaciente['nombre2']);  ?>" id="nombre2" placeholder="2do Nombre" name="nombre2" required>
+                                <input type="text" class="form-control" value="<?= htmlspecialchars($datosPaciente['nombre2']);  ?>" id="nombre2" placeholder="2do Nombre" name="nombre2">
                                 <label for="nombre">2do Nombre</label>
                             </div>
                         </div>

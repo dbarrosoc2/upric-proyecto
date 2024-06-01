@@ -67,15 +67,15 @@ $panelAdmin = true;
                                 <?php foreach ($pacientesBusquedaData as $paciente) { ?>
                                     <tr>
                                         <td class="row-name">
-                                            <span class="nombres"><?= $paciente['nombre'] . " " . $paciente['nombre2'] ?></span>
-                                            <span class="apellidos"><?= $paciente['apellido'] . " " . $paciente['apellido2'] ?></span>
+                                            <span class="nombres"><?= "{$paciente['nombre']}  {$paciente['nombre2']}" ?></span>
+                                            <span class="apellidos"><?= "{$paciente['apellido']}  {$paciente['apellido2']}" ?></span>
                                         </td>
                                         <td><?= $paciente['id_paciente'] ?></td>
                                         <td><?= $paciente['dni'] ?></td>
                                         <td><?= $paciente['telefono'] ?></td>
                                         <td class="row-buttons">
                                             <div class="d-flex">
-                                                <a href="modificar.php?id=<?= $paciente['id_paciente'] ?>" class="btn btn-outline-primary me-3">
+                                                <a href="modificar.php?id_paciente=<?= $paciente['id_paciente'] ?>" class="btn btn-outline-primary me-3">
                                                     <i class="bi bi-eye-fill"></i>
                                                 </a>
 
