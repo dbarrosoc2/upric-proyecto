@@ -47,16 +47,32 @@ $panelAdmin = true;
                         <?php foreach ($pacientesData as $paciente) { ?>
                             <tr data-delete-row-id="<?= $paciente['id_paciente'] ?>">
 
-                                <td><?= $paciente['dni'] ?></td>
-                                <td><?= $paciente['nombre'] . "  " . $paciente['nombre2'] ?></td>
-                                <td><?= $paciente['apellido'] . "  " . $paciente['apellido2'] ?></td>
-                                <td><?= $paciente['estado'] . " " . $paciente['municipio'] . " " . $paciente['parroquia'] . " " . $paciente['calle'] . " " . $paciente['resto'] ?></td>
-                                <td><?= $paciente['hosp_ref'] ?></td>
-                                <td><?= $paciente['comentario'] ?></td>
+                                <td>
+                                    <span class="d-md-none fw-bold">DNI</span>  <?= $paciente['dni'] ?>
+                                </td>
+                                <td>
+                                    <span class="d-md-none fw-bold">Nombre(s)</span> <?= "{$paciente['nombre']} {$paciente['nombre2']}" ?>
+                                </td>
+                                <td>
+                                    <span class="d-md-none fw-bold">Apellido(s) </span> <?= "{$paciente['apellido']} {$paciente['apellido2']}" ?>
+                                </td>
+                                <td>
+                                    <span class="d-md-none fw-bold">Dirección</span>
+                                    <?= "{$paciente['estado']} {$paciente['municipio']} {$paciente['parroquia']} {$paciente['calle']} {$paciente['resto']}" ?>
+                                </td>
+                                <td>
+                                    <span class="d-md-none fw-bold">Hospital Ref. </span>
+                                    <?= $paciente['hosp_ref'] ?>
+                                </td>
+                                <td>
+                                    <span class="d-md-none fw-bold">Comentario </span>
+                                    <?= !isset($paciente['comentario']) || $paciente['comentario'] !== ""  ? $paciente['comentario'] : "Sin comentario" ?>
+                                </td>
                                 <td class="row-buttons">
                                     <div class="d-flex">
                                         <a href="modificar.php?id_paciente=<?= $paciente['id_paciente'] ?>" class="btn btn-outline-primary me-3">
                                             <i class="bi bi-eye-fill"></i>
+                                            <span class="d-md-none ">Editar</span>
                                         </a>
 
                                         <button 
@@ -68,7 +84,15 @@ $panelAdmin = true;
                                             class="bi bi-trash-fill" 
                                             data-delete-id="<?= $paciente['id_paciente'] ?>"
                                             data-delete-name="<?= $paciente['nombre'] ?>" 
-                                            data-delete-url="../../controllers/POO/borrar-paciente-funcion.php" data-delete-type="paciente"></i>
+                                            data-delete-url="../../controllers/POO/borrar-paciente-funcion.php" 
+                                            data-delete-type="paciente"
+                                            ></i>
+                                            <span class="d-md-none "
+                                            data-delete-id="<?= $paciente['id_paciente'] ?>"
+                                            data-delete-name="<?= $paciente['nombre'] ?>" 
+                                            data-delete-url="../../controllers/POO/borrar-paciente-funcion.php" 
+                                            data-delete-type="paciente"
+                                            >Eliminar</span>
                                         </button>
                                     </div>
                                 </td>

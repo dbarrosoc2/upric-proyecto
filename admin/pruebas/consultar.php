@@ -51,6 +51,7 @@
                                     <div class="d-flex">
                                         <a href="modificar.php?id_prueba=<?= $prueba['id_prueba'] ?>" class="btn btn-outline-primary me-3">
                                             <i class="bi bi-eye-fill"></i>
+                                            <span class="d-md-none ">Editar</span>
                                         </a>
 
                                         <button 
@@ -67,6 +68,13 @@
                                             data-delete-url="../../controllers/POO/borrar-prueba-funcion.php"
                                             data-delete-type="prueba"
                                             ></i>
+                                            <span class="d-md-none"
+                                            data-delete-id="<?=$prueba['id_prueba']?>"
+                                            data-delete-name="<?=$prueba['nombre_prueba']?>"
+                                            data-delete-url="../../controllers/POO/borrar-prueba-funcion.php"
+                                            data-delete-type="prueba"
+                                            
+                                            >Eliminar</span>
                                         </button>
                                     </div>
                                 </td>

@@ -348,7 +348,6 @@
       display: block;
     }
   }
-  
 
   .alert  i{
     line-height: .5;
@@ -1333,11 +1332,6 @@
     border-top: 1px solid rgba( var(--bs-custom-gray-rgb), .04);
   }
 
-  .table-fixed-wrapper{
-    max-height: 60vh;
-    overflow-y: auto;
-  }
-
   .table-fixed-wrapper::-webkit-scrollbar {
     width: .7rem;
   }
@@ -1359,6 +1353,10 @@
   .table-fixed-wrapper table{
     table-layout: fixed;
   }
+
+  .table-fixed-wrapper table thead{
+    display: none;
+  }
   
   .table-fixed-wrapper table thead tr th{
     position: sticky; 
@@ -1378,12 +1376,33 @@
     border-bottom-right-radius: .5rem;
   }
 
+  .table-result tbody, .table-result tbody tr, .table-result tbody tr td{
+   display: block
+  }
+
+  .table-result tbody tr{
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba( var(--bs-custom-gray-rgb), .07);
+  }
+
   .table-result tbody tr td{
     font-size: .8rem;
-    padding: 1.2rem .75rem;
+    padding: .35rem .3rem;
     vertical-align: middle;
-    border-bottom-color: rgba( var(--bs-custom-gray-rgb), .07);
+    border-bottom: 0;
   }
+  
+  .table-result tbody tr td.row-buttons div a, .table-result tbody tr td.row-buttons div button{
+    width: 48%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }  
+  
+  .table-result tbody tr td.row-buttons div a i, .table-result tbody tr td.row-buttons div button i{
+    margin-right: .35rem;
+  }  
   
   .table-result tbody tr td.row-name{
   }
@@ -1398,6 +1417,43 @@
     font-size: .75rem;
     font-weight: 700;
     color: rgba( var(--bs-custom-gray-rgb), .5);
+  }
+
+  @media (min-width: 768px) {
+    .table-fixed-wrapper {
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .table-fixed-wrapper table thead{
+      display: table-header-group;
+    }
+
+    .table-result tbody{
+      display: table-row-group
+    } 
+    
+    .table-result tbody tr{
+      display: table-row
+    }
+    
+    .table-result tbody tr td{
+      display: table-cell
+    }
+
+    .table-result tbody tr td{
+      padding: 1.2rem .75rem;
+      border-bottom-color: rgba( var(--bs-custom-gray-rgb), .07);
+    }
+
+    .table-result tbody tr td.row-buttons div a, .table-result tbody tr td.row-buttons div button{
+      width: initial;
+      display: initial;
+    }  
+    
+    .table-result tbody tr td.row-buttons div a i, .table-result tbody tr td.row-buttons div button i{
+      margin-right: initial;
+    }  
   }
 
   /*--------------------------------------------------------------
