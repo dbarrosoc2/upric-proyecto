@@ -25,7 +25,7 @@ $panelAdmin = true;
                 <form class="row g-4 needs-validation" novalidate action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Buscar por DNI, ID, Teléfono, Nombres o Apellidos" name="busqueda" required>
+                            <input type="text" class="form-control" placeholder="Busca por DNI, ID, Teléfono, Nombres o Apellidos" name="busqueda" required>
                             <label for="busqueda">Buscar por DNI, ID, Teléfono, Nombres o Apellidos</label>
                         </div>
                     </div>
