@@ -46,8 +46,13 @@ $panelAdmin = true;
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="permiso" value="<?= isset($permiso) ? $permiso : '' ?>" name="permiso" required>
-                            <label for="permiso">Permiso</label>
+                            <select class="form-select" id="permiso" name="permiso" aria-label="permiso" required>
+                                <option value="1">Recepcionista</option>
+                                <option value="2">Asistente</option>
+                                <option value="3">Bioquimico</option>
+                                <option value="3">Administrador</option>
+                            </select>
+                            <label for="permiso">Selecciona un tipo de permiso</label>
                         </div>
                     </div>
                     <div class="col-md-6">
