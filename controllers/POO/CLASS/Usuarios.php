@@ -49,6 +49,27 @@ class Usuario
 
         return $stmt;
     }
+    
+    public function verificarPermisos($idUsuario, $tipoContenido) {
+        switch ($idUsuario) {
+            case 4:
+                // Superusuario tiene acceso a todo
+                return true;
+            case 3:
+                // Bioquímico tiene acceso a contenido específico
+                return in_array($tipoContenido, ['1', '2', '3']);
+            case 2:
+                // Asistente tiene acceso a contenido limitado
+                return in_array($tipoContenido, ['1', '2']);
+            case 1:
+                // Administrativo tiene acceso restringido
+                return $tipoContenido == '1';
+            default:
+                $this->mostrarError();
+                return false;
+        }
+    
+    }
 
     public function obtenerUsuarioPorId($idUsuario)
     {

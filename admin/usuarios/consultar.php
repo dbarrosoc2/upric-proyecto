@@ -2,7 +2,9 @@
 include '../../common/session-checker.php';
 require_once '../../controllers/POO/CLASS//Usuarios.php';
 require_once "../../controllers/POO/CLASS/funciones.php";
-
+require_once "../../controllers/POO/CLASS/Permisos.php";
+$permisos = new Permisos();
+$numPermiso = $_SESSION['permiso'];
 $title = "Listar Usuarios";
 $description = "Listado de todos los usuarios registrados en UPRIC";
 $panelAdmin = true;
@@ -18,7 +20,11 @@ $panelAdmin = true;
     ?>
 
     <main id="main" class="main">
-        <?php include '../../common/page-title.php'; ?>
+        <?php include '../../common/page-title.php';    
+            if ($permisos->verificarPermisosSuper($numPermiso)) {
+            echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+            }
+        ?>
 
         <div class="card table-fixed-wrapper">
             <div class="card-body">

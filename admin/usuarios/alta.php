@@ -2,7 +2,9 @@
 include '../../common/session-checker.php';
 require_once "../../controllers/POO/CLASS/Usuarios.php";
 require_once "../../controllers/POO/CLASS/funciones.php";
-
+require_once "../../controllers/POO/CLASS/Permisos.php";
+$permisos = new Permisos();
+$numPermiso = $_SESSION['permiso'];
 $title = "Alta Usuarios";
 $description = "Registrar usuarios en UPRIC";
 $panelAdmin = true;
@@ -16,7 +18,11 @@ $panelAdmin = true;
     <?php include '../../common/sidebar.php'; ?>
 
     <main id="main">
-        <?php include '../../common/page-title.php'; ?>
+        <?php include '../../common/page-title.php'; 
+            if ($permisos->verificarPermisosSuper($numPermiso)) {
+                echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+            }
+        ?>
         <div class="card">
             <div class="card-body">
                 <form class="row g-4 needs-validation" novalidate action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
@@ -63,7 +69,7 @@ $panelAdmin = true;
                     </div>
                     <div class="col-md-12">
                         <div class='alert alert-warning' role='alert'>
-                            <i class='bi bi-exclamation-triangle'></i> Para el primer inicio de sesión la contraseña sera el mismo DNI del usuario
+                            <i class='bi bi-exclamation-triangle'></i> Para el primer inicio de sesión la contraseña sera el mismo USUARIO de acceso
                         </div>
                     </div>
                     <div class="col-12 d-flex justify-content-md-end">

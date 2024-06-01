@@ -4,6 +4,13 @@
     require_once "../../controllers/POO/CLASS/funciones.php";
     require_once "../../controllers/POO/CLASS/Prueba.php";
     require_once "../../controllers/POO/CLASS/Prueba-Paciente.php";
+   
+    require_once "../../controllers/POO/CLASS/Permisos.php";
+    $permisos = new Permisos();
+    $numPermiso = $_SESSION['permiso'];
+   
+   
+
 
     $title = "Asignar prueba a paciente";
     $description = "Asigna un tipo de prueba(s) a un paciente";
@@ -29,6 +36,11 @@
 
         <div class="card">
             <div class="card-body">
+            <?php
+                if ($permisos->verificarPermisosAdministrativo($numPermiso)) {
+                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                    }
+                ?>
                 <div class="row placeholderLoading">
                     <div class="col-md-12">
                         <p class="placeholder-glow"><span class="placeholder col-12"></span></p>

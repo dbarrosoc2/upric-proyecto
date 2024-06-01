@@ -2,7 +2,9 @@
     include '../../common/session-checker.php';
     require_once '../../controllers/POO/CLASS//Prueba.php';
     require_once "../../controllers/POO/CLASS/funciones.php";
-
+    require_once "../../controllers/POO/CLASS/Permisos.php";
+    $permisos = new Permisos();
+    $numPermiso = $_SESSION['permiso'];
     $title = "Listar pruebas";
     $description = "Listado de todas las pruebas registradas en UPRIC";
     $panelAdmin = true;
@@ -19,6 +21,11 @@
 
     <main id="main" class="main">
         <?php include '../../common/page-title.php'; ?>
+        <?php
+                if ($permisos->verificarPermisosBioquimico($numPermiso)) {
+                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                    }
+                ?>
 
         <div class="card table-fixed-wrapper">
             <div class="card-body">

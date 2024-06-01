@@ -2,7 +2,9 @@
 include '../../common/session-checker.php';
 require_once '../../controllers/POO/CLASS//Usuarios.php';
 require_once "../../controllers/POO/CLASS/funciones.php";
-
+require_once "../../controllers/POO/CLASS/Permisos.php";
+$permisos = new Permisos();
+$numPermiso = $_SESSION['permiso'];
 $title = "Actualizar usuario";
 $description = "Modifica los datos registrados del usuario.";
 $panelAdmin = true;
@@ -28,6 +30,10 @@ if (isset($_GET['id_prueba']) && !empty($_GET['id_prueba'])) {
             <div class="card-body">
 
                 <?php
+                    if ($permisos->verificarPermisosSuper($numPermiso)) {
+                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                    }
+                ?>
                 if (isset($datosPrueba) && $datosPrueba) {
                 ?>
                     <form id="formulario" class="row g-4 needs-validation" novalidate action="../../controllers/POO/usuario-editar.php" method="post">

@@ -6,7 +6,9 @@
   $title = "Actualizar prueba";
   $description = "Modifica los datos registrados de la prueba.";
   $panelAdmin = true;
-
+  require_once "../../controllers/POO/CLASS/Permisos.php";
+  $permisos = new Permisos();
+  $numPermiso = $_SESSION['permiso'];
   $database = new Prueba();
   if (isset($_GET['id_prueba']) && !empty($_GET['id_prueba'])) {
       $idPrueba = limpiar($_GET['id_prueba']);
@@ -26,7 +28,12 @@
 
     <div class="card">
       <div class="card-body">
-        
+        <?php
+                if ($permisos->verificarPermisosBioquimico($numPermiso)) {
+                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                    }
+                ?>
+
         <?php
           if (isset($datosPrueba) && $datosPrueba) {
         ?>

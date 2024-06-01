@@ -2,7 +2,9 @@
   include '../../common/session-checker.php';
   require_once '../../controllers/POO/CLASS//Prueba.php';
   require_once "../../controllers/POO/CLASS/funciones.php";
-
+  require_once "../../controllers/POO/CLASS/Permisos.php";
+  $permisos = new Permisos();
+  $numPermiso = $_SESSION['permiso'];
   $title = "Alta Prueba";
   $description = "Registra nuevas tipo de pruebas";
   $panelAdmin = true;
@@ -19,7 +21,11 @@
 
   <main id="main" class="main">
     <?php include '../../common/page-title.php'; ?>
-
+    <?php
+                if ($permisos->verificarPermisosBioquimico($numPermiso)) {
+                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                    }
+                ?>
     <div class="card">
       <div class="card-body">
         <form id="formulario" class="row g-4 needs-validation" novalidate action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">

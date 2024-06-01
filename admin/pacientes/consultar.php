@@ -2,10 +2,13 @@
 include '../../common/session-checker.php';
 require_once "../../controllers/POO/CLASS/Paciente.php";
 require_once "../../controllers/POO/CLASS/funciones.php";
-
 $title = "Consultar Paciente";
 $description = "Buscar pacientes por sus datos en UPRIC";
 $panelAdmin = true;
+require_once "../../controllers/POO/CLASS/Permisos.php";
+    $permisos = new Permisos();
+    $numPermiso = $_SESSION['permiso'];
+   
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +21,11 @@ $panelAdmin = true;
 
 
     <main id="main" class="main">
+    <?php
+                if ($permisos->verificarPermisosAdministrativo($numPermiso)) {
+                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                    }
+                ?>
         <?php include '../../common/page-title.php'; ?>
 
         <div class="card">

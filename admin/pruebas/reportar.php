@@ -4,7 +4,9 @@
     require_once '../../controllers/POO/CLASS/Prueba.php';
     require_once '../../controllers/POO/CLASS/Paciente.php';
     require_once '../../controllers/POO/CLASS/Prueba-Paciente.php';
-
+    require_once "../../controllers/POO/CLASS/Permisos.php";
+    $permisos = new Permisos();
+    $numPermiso = $_SESSION['permiso'];
     $title = "Reportar prueba";
     $description = "Reportar resultados pendientes de pacientes en pruebas especificas.";
     $panelAdmin = true;
@@ -21,6 +23,12 @@
 
     <main id="main" class="main">
         <?php include '../../common/page-title.php'; ?>
+        <?php
+                if ($permisos->verificarPermisosBioquimico($numPermiso)) {
+                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                    }
+                ?>
+
         <div class="card">
             <div class="card-body">
                 <div class="row">

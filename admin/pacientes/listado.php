@@ -2,6 +2,10 @@
 include '../../common/session-checker.php';
 require_once '../../controllers/POO/CLASS//Paciente.php';
 require_once "../../controllers/POO/CLASS/funciones.php";
+require_once "../../controllers/POO/CLASS/Permisos.php";
+    $permisos = new Permisos();
+    $numPermiso = $_SESSION['permiso'];
+   
 
 $title = "Listado de pacientes";
 $description = "Listado de todas los pacientes registrados en UPRIC";
@@ -21,6 +25,11 @@ $panelAdmin = true;
         <?php include '../../common/page-title.php'; ?>
 
         <div class="card table-fixed-wrapper">
+        <?php
+                if ($permisos->verificarPermisosAdministrativo($numPermiso)) {
+                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                    }
+                ?>
             <div class="card-body">
                 <?php
                 $pacienteInstance = new paciente();
