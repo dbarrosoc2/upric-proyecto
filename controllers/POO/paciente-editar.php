@@ -3,7 +3,6 @@ require_once "./CLASS/Paciente.php";
 require_once "./CLASS/funciones.php";
 
 if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
-    var_dump($_POST);
     if (isset($_POST['id_usuario'])) {
         $id = limpiar($_POST['id_usuario']);
         $nombre = limpiar($_POST['nombre']);
