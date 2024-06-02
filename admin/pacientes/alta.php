@@ -2,7 +2,7 @@
     include '../../common/session-checker.php';
     require_once "../../controllers/POO/CLASS/Paciente.php";
     require_once "../../controllers/POO/CLASS/funciones.php";
-    // require_once "../../controllers/POO/CLASS/Permisos.php";
+    require_once "../../controllers/POO/CLASS/Permisos.php";
 
     $title = "Alta Paciente";
     $description = "Registrar pacientes en UPRIC";
