@@ -31,7 +31,7 @@
               <hr class="dropdown-divider">
             </li>
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="<?= $url_base ?>admin/usuarios/cuenta.php">
+              <a class="dropdown-item d-flex align-items-center" href="<?= $url_base ?>admin/logs.php">
                 <i class="bi bi-person"></i>
                 <span>Logs</span>
               </a>

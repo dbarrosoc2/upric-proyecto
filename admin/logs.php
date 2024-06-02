@@ -2,8 +2,11 @@
 include '../common/session-checker.php';
 
 $title = 'Panel de administrador';
-$description = 'Resumen estadístico de UPRIC';
+$description = 'Resumen de Logs';
 $panelAdmin = true;
+require_once "../controllers/POO/CLASS/Permisos.php";
+$permisos = new Permisos();
+$numPermiso = $_SESSION['permiso'];
 
 // Activa la visualización de errores
 ini_set('display_errors', 1);
@@ -23,6 +26,11 @@ error_reporting(E_ALL);
   <?php include '../common/sidebar.php'; ?>
 
   <main id="main" class="main">
+  <?php    
+            if ($permisos->verificarPermisosSuper($numPermiso)) {
+            echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+            }
+        ?>
     <div class="pagetitle">
       <?php include '../common/page-title.php'; ?>
 
