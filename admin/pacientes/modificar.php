@@ -1,11 +1,16 @@
 <?php
 include '../../common/session-checker.php';
+require_once "../../controllers/POO/CLASS/Permisos.php";
+require_once "../../controllers/POO/CLASS/Paciente.php";
 
 $title = "Modificar Paciente";
 $description = "Editar datos personales de paciente";
 $panelAdmin = true;
-   
+
 $database = new Paciente();
+$permisos = new Permisos();
+$numPermiso = $_SESSION['permiso'];
+
 if (isset($_GET['id_paciente'])) {
     if (!empty($_GET['id_paciente'])) {
         $id = $_GET['id_paciente'];
@@ -15,8 +20,7 @@ if (isset($_GET['id_paciente'])) {
 ?>
 <!DOCTYPE html>
 <html lang="es">
-<?php require_once __DIR__ . '/../../common/head.php'; ?>
-
+    <?php require_once __DIR__ . '/../../common/head.php'; ?>
 <body>
     <?php include '../../common/header.php';    ?>
     <?php include '../../common/sidebar.php'; ?>
@@ -149,10 +153,10 @@ if (isset($_GET['id_paciente'])) {
         ?>
 
     </main>
+
     <?php
-    $customScript = "pacientes.js";
-    require_once __DIR__ . '/../../common/footer.php';
+        $customScript = "pacientes.js";
+        require_once __DIR__ . '/../../common/footer.php';
     ?>
 </body>
-
 </html>
