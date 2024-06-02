@@ -2,11 +2,13 @@
     include '../../common/session-checker.php';
     require_once "../../controllers/POO/CLASS/Paciente.php";
     require_once "../../controllers/POO/CLASS/funciones.php";
-    require_once "../../controllers/POO/CLASS/Permisos.php";
+    // require_once "../../controllers/POO/CLASS/Permisos.php";
 
     $title = "Alta Paciente";
     $description = "Registrar pacientes en UPRIC";
     $panelAdmin = true;
+    // $permisos = new Permisos();
+    // $numPermiso = $_SESSION['permiso'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,7 +22,11 @@
         <?php include '../../common/page-title.php'; ?>
         <div class="card">
             <div class="card-body">
-               
+                <?php
+                // if ($permisos->verificarPermisosAdministrativo($numPermiso)) {
+                //         echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                //     }
+                ?>
                 <form class="row g-4 needs-validation" novalidate action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                     <div class="col-md-4">
                         <div class="form-floating">
