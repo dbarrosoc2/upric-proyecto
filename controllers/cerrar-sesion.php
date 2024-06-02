@@ -1,8 +1,9 @@
 <?php
 require "./POO/CLASS/Logs.php";
-$logs = new RegistroLogger("registroCSVLogin.csv");
-$logs->cierreSesion($_SESSION["usuario"],$_SERVER['REMOTE_ADDR'], "CERRADA LA SESION" );
+
 session_start();
+$logs = new RegistroLogger("registroCSVLogin.csv");
+$logs->cierreSesion($_SESSION["usuario"], "CERRADA LA SESION" );
 
 // vaciar las variables guardadas y cerrar sesion
 session_unset();

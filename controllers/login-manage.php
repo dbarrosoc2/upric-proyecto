@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $logs = new RegistroLogger("registroCSVLogin.csv");
 
         if ($stmt->rowCount() > 0) {
-            $logs->inicioSesion($user, "clave Usuario", $_SERVER['REMOTE_ADDR'], "LOGIN CORRECTO");
+            $logs->inicioSesion($user, "clave Usuario", "LOGIN CORRECTO");
 
             $fila = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['valid'] = true;
