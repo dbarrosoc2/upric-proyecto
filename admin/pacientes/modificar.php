@@ -1,12 +1,9 @@
 <?php
 include '../../common/session-checker.php';
+
 $title = "Modificar Paciente";
 $description = "Editar datos personales de paciente";
 $panelAdmin = true;
-require_once "../../controllers/POO/CLASS/Permisos.php";
-    $permisos = new Permisos();
-    $numPermiso = $_SESSION['permiso'];
-   
    
 $database = new Paciente();
 if (isset($_GET['id_paciente'])) {
