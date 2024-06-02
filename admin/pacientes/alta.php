@@ -25,9 +25,9 @@
         <div class="card">
             <div class="card-body">
                 <?php
-                if ($permisos->verificarPermisosAdministrativo($numPermiso)) {
-                        echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
-                    }
+                // if ($permisos->verificarPermisosAdministrativo($numPermiso)) {
+                //         echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+                //     }
                 ?>
                 <form class="row g-4 needs-validation" novalidate action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                     <div class="col-md-4">
