@@ -6,14 +6,6 @@ class Permisos {
             echo "<div class='alert alert-danger' role='alert'>No tienes los permisos para visualizar este contenido</div>";
             die();
         }
-
-    }
-    
-    public function verificarPermisosSuper($idUsuario) {
-        if($idUsuario != 4){
-            echo "<div class='alert alert-danger' role='alert'>No tienes los permisos para visualizar este contenido</div>";
-            die();
-        }
     }
 
     public function verificarPermisosBioquimico($idUsuario) {
