@@ -4,20 +4,16 @@
     require_once "../../controllers/POO/CLASS/funciones.php";
     require_once "../../controllers/POO/CLASS/Prueba.php";
     require_once "../../controllers/POO/CLASS/Prueba-Paciente.php";
-   
     require_once "../../controllers/POO/CLASS/Permisos.php";
-    $permisos = new Permisos();
-    $numPermiso = $_SESSION['permiso'];
-   
-   
-
-
+    
     $title = "Asignar prueba a paciente";
     $description = "Asigna un tipo de prueba(s) a un paciente";
     $panelAdmin = true;
     $prueba = new Prueba();
     $paciente = new Paciente();
     $prueba_paciente = new Prueba_Paciente();
+    $permisos = new Permisos();
+    $numPermiso = $_SESSION['permiso'];
     $customStyle = "multiple-select.css";
     // Define variables para almacenar los datos del formulario después de limpiarlos
     $prueba_ids = $paciente_id = $fecha = $comentarios = "";
