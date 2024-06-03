@@ -1,8 +1,7 @@
 <?php
 require_once "./CLASS/Usuarios.php";
 require_once "./CLASS/funciones.php";
-
-if (isset($_POST['accion']) && $_POST['accion'] === 'editar' && isset($_POST['id_usuario'])) {
+if (isset($_POST['accion']) && $_POST['accion'] == 'editar' && isset($_POST['id_usuario'])) {
     $id = limpiar($_POST['id_usuario']);
     $nombre = limpiar($_POST['nombre']);
     $apellido = limpiar($_POST['apellidos']);

@@ -69,10 +69,10 @@ if (isset($_GET['id_prueba']) && !empty($_GET['id_prueba'])) {
                         <div class="col-md-6">
                             <div class="form-floating">
                                 <select class="form-select" value="<?php echo htmlspecialchars($datosPrueba['permiso']); ?>" id="permiso" name="permiso" aria-label="permiso" required >
-                                    <option value="1" <?= $datosPrueba['permiso'] === 1 ? "selected" : "" ?>>Recepcionista</option>
-                                    <option value="2" <?= $datosPrueba['permiso'] === 2 ? "selected" : "" ?>>Asistente</option>
-                                    <option value="3" <?= $datosPrueba['permiso'] === 3 ? "selected" : "" ?>>Bioquimico</option>
-                                    <option value="3" <?= $datosPrueba['permiso'] === 4 ? "selected" : "" ?>>Administrador</option>
+                                    <option value="1" <?= $datosPrueba['permiso'] == 1 ? "selected" : "" ?>>Recepcionista</option>
+                                    <option value="2" <?= $datosPrueba['permiso'] == 2 ? "selected" : "" ?>>Asistente</option>
+                                    <option value="3" <?= $datosPrueba['permiso'] == 3 ? "selected" : "" ?>>Bioquimico</option>
+                                    <option value="4" <?= $datosPrueba['permiso'] == 4 ? "selected" : "" ?>>Administrador</option>
                                 </select>
                                 <label for="permiso">Permiso</label>
                             </div>
