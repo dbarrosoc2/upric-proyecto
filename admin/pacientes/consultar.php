@@ -73,7 +73,7 @@ $numPermiso = $_SESSION['permiso'];
                             </thead>
                             <tbody>
                                 <?php foreach ($pacientesBusquedaData as $paciente) { ?>
-                                    <tr>
+                                    <tr data-delete-row-id="<?=$paciente['id_paciente']?>">
                                         <td class="row-name">
                                             <span class="nombres"><?= "{$paciente['nombre']}  {$paciente['nombre2']}" ?></span>
                                             <span class="apellidos"><?= "{$paciente['apellido']}  {$paciente['apellido2']}" ?></span>

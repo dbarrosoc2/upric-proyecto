@@ -135,7 +135,7 @@ if (isset($_GET['id_paciente'])) {
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <textarea class="form-control" id="comentario" value="<?= htmlspecialchars($datosPaciente['comentario']);  ?>" name="comentario" placeholder="Comentario (Opcional)" rows="5"></textarea>
+                                <textarea class="form-control" id="comentario" name="comentario" placeholder="Comentario (Opcional)" rows="5"><?= htmlspecialchars($datosPaciente['comentario']);  ?></textarea>
                                 <label for="comentario">Comentario (Opcional)</label>
                             </div>
                         </div>
