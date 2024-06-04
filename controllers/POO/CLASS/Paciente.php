@@ -48,48 +48,6 @@ class Paciente
         return $stmt;
     }
 
-    public function listarPacientesEnTabla()
-    {
-        $query = "SELECT id_paciente, dni, nombre, apellido, apellido2 FROM paciente";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if (empty($pacientes)) {
-            return "<p>No hay pacientes disponibles.</p>";
-        }
-
-        $html = '<div class="container mt-5">
-                   
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID Paciente</th>
-                                <th>DNI</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Segundo Apellido</th>
-                            </tr>
-                        </thead>
-                        <tbody>';
-
-        foreach ($pacientes as $paciente) {
-            $html .= '<tr>
-                        <td>' . htmlspecialchars($paciente['id_paciente']) . '</td>
-                        <td>' . htmlspecialchars($paciente['dni']) . '</td>
-                        <td>' . htmlspecialchars($paciente['nombre']) . '</td>
-                        <td>' . htmlspecialchars($paciente['apellido']) . '</td>
-                        <td>' . htmlspecialchars($paciente['apellido2']) . '</td>
-                    </tr>';
-        }
-
-        $html .= '    </tbody>
-                    </table>
-                </div>';
-
-        return $html;
-    }
-
     public function listarPacientesParaSelect()
     {
         try {

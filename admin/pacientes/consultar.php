@@ -2,12 +2,12 @@
 include '../../common/session-checker.php';
 require_once "../../controllers/POO/CLASS/Paciente.php";
 require_once "../../controllers/POO/CLASS/funciones.php";
+require_once "../../controllers/POO/CLASS/Permisos.php";
 $title = "Consultar Paciente";
 $description = "Buscar pacientes por sus datos en UPRIC";
 $panelAdmin = true;
-require_once "../../controllers/POO/CLASS/Permisos.php";
-    $permisos = new Permisos();
-    $numPermiso = $_SESSION['permiso'];
+$permisos = new Permisos();
+$numPermiso = $_SESSION['permiso'];
    
 ?>
 

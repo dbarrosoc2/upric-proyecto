@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['permiso'] = $fila['permiso'];
             $_SESSION['num_colegiado'] = $fila['num_colegiado'];
             if ($user == $pass) {
-                header("Location: ../admin/usuarios/cambioContrasena.php");
+                header("Location: ../admin/usuarios/cambio-contrasena.php");
             } else {
                 header("Location: ../admin/panel.php");
             }

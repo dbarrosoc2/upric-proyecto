@@ -33,7 +33,7 @@ if (isset($_GET['id_paciente'])) {
         ?>
             <div class="card">
                 <div class="card-body">
-                    <form class="row g-4 needs-validation" novalidate action="../../controllers/POO/editar-paciente.php" method="post">
+                    <form class="row g-4 needs-validation" novalidate action="../../controllers/POO/paciente-editar.php" method="post">
                         <input type="hidden" name="id_paciente" value="<?= $datosPaciente['id_paciente']; ?>">
                         <div class="col-md-4">
                             <div class="form-floating">
