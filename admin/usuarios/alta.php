@@ -18,10 +18,10 @@ $panelAdmin = true;
     <?php include '../../common/sidebar.php'; ?>
 
     <main id="main">
-        <?php include '../../common/page-title.php'; 
-            if ($permisos->verificarPermisosSuper($numPermiso)) {
-                echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
-            }
+        <?php include '../../common/page-title.php';
+        if ($permisos->verificarPermisosSuper($numPermiso)) {
+            echo "Contenido visible para el usuario con id " . $_SESSION['id_usuario'] . ".";
+        }
         ?>
         <div class="card">
             <div class="card-body">
@@ -56,7 +56,7 @@ $panelAdmin = true;
                                 <option value="1">Recepcionista</option>
                                 <option value="2">Asistente</option>
                                 <option value="3">Bioquimico</option>
-                                <option value="3">Administrador</option>
+                                <option value="4">Administrador</option>
                             </select>
                             <label for="permiso">Selecciona un tipo de permiso</label>
                         </div>
