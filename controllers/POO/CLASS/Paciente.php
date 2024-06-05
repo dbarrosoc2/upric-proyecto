@@ -40,18 +40,19 @@ class Paciente
     // Método para leer las pruebas
     public function leerPacientes()
     {
-        $query = "SELECT id_paciente, dni, nombre, nombre2, apellido, apellido2, confirmatorio, fecha_confirmatorio, telefono, fecha_nac, estado, municipio, parroquia, calle, resto, hosp_ref, comentario  FROM " . $this->table_name;
+    $query = "SELECT id_paciente, dni, nombre, nombre2, apellido, apellido2, confirmatorio, fecha_confirmatorio, telefono, fecha_nac, estado, municipio, parroquia, calle, resto, hosp_ref, comentario 
+              FROM " . $this->table_name . " 
+              ORDER BY apellido ASC, nombre ASC";
 
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
 
-        return $stmt;
+    return $stmt;
     }
-
     public function listarPacientesParaSelect()
     {
         try {
-            $queryPac = "SELECT id_paciente, dni, nombre, apellido, apellido2 FROM paciente";
+            $queryPac = "SELECT id_paciente, dni, nombre, apellido, apellido2 FROM paciente ORDER BY apellido ASC";
             $stmtPac = $this->conn->prepare($queryPac);
             $stmtPac->execute();
 
@@ -74,31 +75,30 @@ class Paciente
     {
         try {
             $query = "SELECT p.id_paciente, p.dni, p.nombre, p.apellido, p.apellido2, pp.fecha_toma_muestra
-                     FROM paciente p
-                     INNER JOIN prueba_paciente pp ON p.id_paciente = pp.id_paciente";
+                    FROM paciente p
+                    INNER JOIN prueba_paciente pp ON p.id_paciente = pp.id_paciente
+                    ORDER BY p.apellido ASC, p.nombre ASC";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
 
-            $opcionesPacHTML = ""; // Agregar opción por defecto en blanco
-            $fechasTomaMuestra = array(); // Array para almacenar las fechas de toma de muestra ya vistas
+            $opcionesPacHTML = "";
+            $fechasTomaMuestra = array();
 
             while ($filaPac = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                // Verificar si la fecha de toma de muestra ya ha sido incluida
                 if (!in_array($filaPac['fecha_toma_muestra'], $fechasTomaMuestra)) {
-
-                    $valorOpcion = "{$filaPac['id_paciente']} | {$filaPac['fecha_toma_muestra']}"; // Concatenar ID del paciente y fecha de toma de muestra
+                    $valorOpcion = "{$filaPac['id_paciente']} | {$filaPac['fecha_toma_muestra']}";
                     $opcionesPacHTML .= "<option value='$valorOpcion'>{$filaPac['nombre']} {$filaPac['apellido']} {$filaPac['apellido2']} /  DNI {$filaPac['dni']} / Fecha de toma de muestra {$filaPac['fecha_toma_muestra']} </option>";
-                    $fechasTomaMuestra[] = $filaPac['fecha_toma_muestra']; // Agregar la fecha de toma de muestra al array
+                    $fechasTomaMuestra[] = $filaPac['fecha_toma_muestra'];
                 }
             }
 
             return $opcionesPacHTML;
         } catch (PDOException $e) {
-            // Manejo de excepciones en caso de error de base de datos
             echo "Error al listar pacientes: " . $e->getMessage();
-            return ""; // Devolver cadena vacía en caso de error
+            return "";
         }
     }
+
 
 
     // Método para borrar un paciente
@@ -145,13 +145,14 @@ class Paciente
     {
         try {
             $query = "SELECT * FROM paciente 
-                WHERE id_paciente LIKE '$busqueda'
-                OR dni LIKE '$busqueda'
-                OR nombre LIKE '$busqueda'
-                OR nombre2 LIKE '$busqueda'
-                OR apellido LIKE '$busqueda' 
-                OR apellido2 LIKE '$busqueda'
-                OR telefono LIKE '$busqueda'";
+                    WHERE id_paciente LIKE '$busqueda'
+                    OR dni LIKE '$busqueda'
+                    OR nombre LIKE '$busqueda'
+                    OR nombre2 LIKE '$busqueda'
+                    OR apellido LIKE '$busqueda' 
+                    OR apellido2 LIKE '$busqueda'
+                    OR telefono LIKE '$busqueda'
+                    ORDER BY apellido ASC, nombre ASC";
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
@@ -162,6 +163,7 @@ class Paciente
             die("Error al procesar la solicitud: " . $e->getMessage());
         }
     }
+
 
 
     // Método para insertar un paciente
