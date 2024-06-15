@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         require "POO/CLASS/Logs.php";
 
         echo "no error";
+
+        exit();
         $logs = new RegistroLogger("registroCSVLogin.csv");
 
         if ($stmt->rowCount() > 0) {
