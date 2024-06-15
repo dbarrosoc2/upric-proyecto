@@ -7,7 +7,7 @@ try {
     $conn = new PDO($dsn, $BBDD_USER, $BBDD_PASSWORD);
 } catch (PDOException $e) {
 
-    echo "ERRORRRRRRRR"
+    echo "ERRORRRRRRRR";
     die("Error: " . $e->getMessage() . "<br>");
 }
 
