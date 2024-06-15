@@ -1,4 +1,10 @@
 <?php
+echo $_SERVER["HTTP_HOST"];
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
 if ($_SERVER["HTTP_HOST"] === "www.upric.barrosocda.com") {
     $url_base = "/";
     $url_base_http = "https://www.upric.barrosocda.com/";
