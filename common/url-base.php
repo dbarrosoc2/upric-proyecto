@@ -5,7 +5,7 @@ echo "<br>";
 echo "<br>";
 echo "<br>";
 echo "<br>";
-if ($_SERVER["HTTP_HOST"] === "www.upric.barrosocda.com") {
+if ($_SERVER["HTTP_HOST"] === "upric.barrosocda.com") {
     $url_base = "/";
     $url_base_http = "https://www.upric.barrosocda.com/";
 } else if ($_SERVER["HTTP_HOST"] === "localhost" || $_SERVER["HTTP_HOST"] === "127.0.0.1:8000") {
