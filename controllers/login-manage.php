@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(['user' => $user, 'pass' => $pass]);
 
         echo "eror";
+        exit();
         require_once "./POO/CLASS/Logs.php";
         echo "eror 2";
         exit();
