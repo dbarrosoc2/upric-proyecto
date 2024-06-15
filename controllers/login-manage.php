@@ -13,10 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Databse Connection
-    echo __DIR__ . "/database-connection.php";
+    // Database Connection
     $conn = "database-connection.php";
-    echo "error";
     exit();
     try {
         $query = "SELECT nombre, apellidos, dni, usuario, permiso, num_colegiado, id_usuario
