@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Database Connection
     echo "eror";
-    $conn = require "database-connection.php";
+    $conn = include "database-connection.php";
 
     echo $conn;
     echo "erorrrrr 2";
