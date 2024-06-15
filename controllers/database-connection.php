@@ -1,5 +1,5 @@
 <?php
-require __DIR__ .'/config.php';
+require 'config.php';
 
 try {
     $dsn = "mysql:host=" . $BBDD_HOST . ";dbname=" . $BBDD_NAME . ";charset=utf8";
