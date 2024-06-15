@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Databse Connection
     echo __DIR__ . "/database-connection.php";
-    $conn = include __DIR__ . "/database-connection.php";
+    $conn = "database-connection.php";
     echo "error";
     exit();
     try {
