@@ -53,7 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // $errores[] = '<div class="alert alert-danger" role="alert">Usuario no encontrado.</div>';
             $_SESSION['errores'] = "Existe un error con tu usuario o contraseña.";
             $logs->inicioSesion($user, $clave, $_SERVER['REMOTE_ADDR'], "LOGIN INCORRECTO");
-            header("Location: ../pages/login.php");
+            // header("Location: ../pages/login.php");
+            echo "error";
             exit();
         }
     } catch (Exception $e) {
