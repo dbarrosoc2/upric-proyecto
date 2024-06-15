@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER["HTTP_HOST"] === "www.upric.es") {
+if ($_SERVER["HTTP_HOST"] === "upric.barrosocda.com") {
     $BBDD_HOST = "db5015530601.hosting-data.io";
     $BBDD_NAME = "dbs12685568";
     $BBDD_USER = "dbu5255480";
