@@ -24,12 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($query);
         $stmt->execute(['user' => $user, 'pass' => $pass]);
 
-        require "/POO/CLASS/Logs.php";
+        echo "eror";
+        require_once "./POO/CLASS/Logs.php";
+        echo "eror 2";
+        exit();
 
-        $logs = new RegistroLogger("registroCSVLogin.csv");
+        // $logs = new RegistroLogger("registroCSVLogin.csv");
 
         if ($stmt->rowCount() > 0) {
-            $logs->inicioSesion($user, "clave Usuario", "LOGIN CORRECTO");
+            // $logs->inicioSesion($user, "clave Usuario", "LOGIN CORRECTO");
 
             $fila = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['valid'] = true;
