@@ -25,7 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($query);
         $stmt->execute(['user' => $user, 'pass' => $pass]);
 
+        echo "error";
         require "POO/CLASS/Logs.php";
+
+        echo "no error";
         $logs = new RegistroLogger("registroCSVLogin.csv");
 
         if ($stmt->rowCount() > 0) {
