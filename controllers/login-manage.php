@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Database Connection
     $conn = "database-connection.php";
-    exit();
     try {
         $query = "SELECT nombre, apellidos, dni, usuario, permiso, num_colegiado, id_usuario
         FROM usuario 
