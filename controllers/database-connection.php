@@ -7,9 +7,11 @@ try {
     $conn = new PDO($dsn, $BBDD_USER, $BBDD_PASSWORD);
 
     echo "<br>";
-    var_dump($conn);
 } catch (PDOException $e) {
     die("Error: " . $e->getMessage() . "<br>");
 }
+
+var_dump($conn);
+
 
 return  $conn;
