@@ -45,15 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: ../admin/panel.php");
             }
         } else {
-            // $errores[] = '<div class="alert alert-danger" role="alert">Usuario no encontrado.</div>';
             $_SESSION['errores'] = "Existe un error con tu usuario o contraseña.";
             $logs->inicioSesion($user, $clave, $_SERVER['REMOTE_ADDR'], "LOGIN INCORRECTO");
             header("Location: ../pages/login.php");
         }
     } catch (Exception $e) {
         $_SESSION['errores'] = "Ha ocurrido un error inesperado: {$e->getMessage()}</div>";
-
-        echo "error";
         exit();
     }
 }
