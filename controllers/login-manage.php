@@ -14,11 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Database Connection
-    echo "error 1";
     $conn = include "database-connection.php";
-
-    var_dump($conn);
-    echo "erorrrrr 2";
     try {
         $query = "SELECT nombre, apellidos, dni, usuario, permiso, num_colegiado, id_usuario
         FROM usuario 
@@ -28,16 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($query);
         $stmt->execute(['user' => $user, 'pass' => $pass]);
 
-        echo "eror";
-        exit();
         require_once "./POO/CLASS/Logs.php";
-        echo "eror 2";
-        exit();
-
-        // $logs = new RegistroLogger("registroCSVLogin.csv");
+        $logs = new RegistroLogger("registroCSVLogin.csv");
 
         if ($stmt->rowCount() > 0) {
-            // $logs->inicioSesion($user, "clave Usuario", "LOGIN CORRECTO");
+            $logs->inicioSesion($user, "clave Usuario", "LOGIN CORRECTO");
 
             $fila = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['valid'] = true;
